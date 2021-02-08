@@ -25,3 +25,7 @@ results = get_results(endpoint_url, query)
 
 for result in results["results"]["bindings"]:
     print(result)
+
+
+def get_triplets(objects):
+  return None

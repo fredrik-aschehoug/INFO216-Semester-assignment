@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from services.graphService import parse_input
+from services.graphService import get_extended_graph
 from pydantic import BaseModel
 from typing import Any
 
@@ -18,5 +18,5 @@ async def root():
 
 @app.get("/kg")
 async def get_kg(item: Item):
-    return parse_input(item.graph, item.notation)
+    return get_extended_graph(item.graph, item.notation)
     # return item
