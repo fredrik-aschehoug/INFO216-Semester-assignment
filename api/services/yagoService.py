@@ -1,6 +1,4 @@
-import sys
-from SPARQLWrapper import SPARQLWrapper, JSON
-from services.queryService import get_results
+from services.QueryService import QueryService
 
 endpoint_url = "https://imdb.uib.no/bg-yago3/namespace/yago3/sparql"
 
@@ -21,12 +19,14 @@ WHERE {
 }"""
 
 
-def build_query(entity: str):
-    return base_query.replace("<entity>", entity)
+class YagoService(QueryService):
 
+    @staticmethod
+    def build_query(entity: str):
+        return base_query.replace("<entity>", entity)
 
-def get_yago_triples(entity: str):
-    print("Entity: %s" % entity)
-    query = build_query(entity)
-    results = get_results(endpoint_url, query)
-    return results
+    def get_triples(self, entity: str):
+        print("Entity: %s" % entity)
+        query = self.build_query(entity)
+        results = self.execute_query(endpoint_url, query)
+        return results

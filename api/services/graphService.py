@@ -1,6 +1,6 @@
 from rdflib import Graph, URIRef, Literal
 import json
-from services.yagoService import get_yago_triples
+from services.YagoService import YagoService
 print(__name__)
 
 
@@ -51,12 +51,13 @@ def create_node(node: dict):
 
 def get_extended_graph(raw, notation):
     g = parse_input(raw, notation)
+    yagoService = YagoService()
 
     # objects = get_objects(g)
     entities = get_entities(g)
     triples = list()
     for entity in entities:
-        triples.extend(get_yago_triples(entity))
+        triples.extend(yagoService.get_triples(entity))
 
     for triple in triples:
         g.add((create_node(triple["subject"]), create_node(triple["predicate"]), create_node(triple["object"])))
