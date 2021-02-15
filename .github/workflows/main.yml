@@ -20,7 +20,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Check Out Rep
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Login to Docker Hub
         uses: docker/login-action@v1
@@ -39,7 +39,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          #tags: ushamandya/simplewhale:latest
+          tags: fredrik-aschehoug/INFO216-Semester-assignment:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
