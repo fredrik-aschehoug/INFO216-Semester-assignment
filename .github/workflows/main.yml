@@ -39,7 +39,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: fredrik-aschehoug/INFO216-Semester-assignment:latest
+          tags: fredrik-aschehoug/info216-semester-assignment:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
