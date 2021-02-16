@@ -1,7 +1,7 @@
-from rdflib import Graph, URIRef, Literal
+from rdflib import Graph, URIRef, Literal, Namespace
+from rdflib.namespace import OWL
 import json
 from services.YagoService import YagoService
-print(__name__)
 
 
 def parse_input_json(raw, notation):
@@ -35,7 +35,7 @@ def get_entities(g):
           ?subject nhterm:hasEntity ?entity .
        }""")
 
-    entities = set(["<%s>" % str(entity) for (entity,) in qres])
+    entities = set([str(entity) for (entity,) in qres])
     return list(entities)
 
 
@@ -53,13 +53,19 @@ def get_extended_graph(raw, notation):
     g = parse_input(raw, notation)
     yagoService = YagoService()
 
+    g.bind("yago3", Namespace("http://yago-knowledge.org/resource/"))
+
     # objects = get_objects(g)
     entities = get_entities(g)
     triples = list()
     for entity in entities:
-        triples.extend(yagoService.get_triples(entity))
+        yago_triples = yagoService.get_triples(entity)
+        if (len(yago_triples) > 0):
+            triples.append({"entity": entity, "triples": yago_triples})
 
-    for triple in triples:
-        g.add((create_node(triple["subject"]), create_node(triple["predicate"]), create_node(triple["object"])))
+    for entity in triples:
+        g.add((URIRef(entity["entity"]), OWL.sameAs, create_node(entity["triples"][0]["subject"])))
+        for triple in entity["triples"]:
+            g.add((create_node(triple["subject"]), create_node(triple["predicate"]), create_node(triple["object"])))
 
     return g.serialize(format='turtle').decode("utf-8")

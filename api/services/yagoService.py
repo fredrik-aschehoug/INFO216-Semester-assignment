@@ -5,13 +5,12 @@ prefix skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT ?subject ?predicate ?object
 WHERE {
-  ?subject owl:sameAs <entity> .
+  ?subject owl:sameAs <<entity>> .
   ?subject ?predicate ?object .
   FILTER(
     ?predicate != rdfs:label &&
     ?predicate != yago:redirectedFrom &&
     ?predicate != owl:sameAs &&
-    ?predicate != rdf:type &&
     ?predicate != skos:prefLabel
   )
 }"""
@@ -29,7 +28,7 @@ class YagoService(QueryService):
         return base_query.replace("<entity>", entity)
 
     def get_triples(self, entity: str):
-        print("Entity: %s" % entity)
+        # print("Entity: %s" % entity)
         query = self.build_query(entity)
         results = self.execute_query(query)
         return results
