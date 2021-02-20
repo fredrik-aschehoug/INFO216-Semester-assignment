@@ -3,6 +3,7 @@ from rdflib.namespace import OWL
 import json
 from typing import Union, List, Tuple
 from services.YagoService import YagoService
+from services.RelationService import RelationService
 from api.models import Item, rdf_node
 
 
@@ -12,6 +13,7 @@ class GraphService:
         self.notation = params.notation
         self.graph = self.parse_input(params.graph, params.notation)
         self.graph.bind("yago3", Namespace("http://yago-knowledge.org/resource/"))
+        self.graph.bind("owl", OWL)
 
     def __str__(self):
         return self.graph.serialize(format=self.notation).decode("utf-8")
@@ -68,6 +70,10 @@ class GraphService:
             self.graph.add((URIRef(entity["entity"]), OWL.sameAs, self.create_node(entity["triples"][0]["subject"])))
             for triple in entity["triples"]:
                 self.graph.add(self.create_triple(triple))
+
+    def annotate_relations(self):
+        relationService = RelationService(self.graph)
+        self.graph = relationService.get_graph()
 
 
 def get_objects(g):
