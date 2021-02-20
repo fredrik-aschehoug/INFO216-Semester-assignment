@@ -28,4 +28,4 @@ for result in results["results"]["bindings"]:
 
 
 def get_triplets(objects):
-  return None
+    pass

@@ -1,22 +1,15 @@
-from fastapi import FastAPI
-from services.graphService import get_extended_graph
-from pydantic import BaseModel
-from typing import Any
+from fastapi import FastAPI, Depends
+from services.graphService import GraphService
+from services.YagoService import YagoService
+from models import Item
 
 app = FastAPI()
 
 
-class Item(BaseModel):
-    graph: Any
-    notation: str
+@app.get("/", response_model=Item)
+async def get_extended_graph(graph: GraphService = Depends(GraphService)):
+    yagoService = YagoService()
 
+    graph.extend(yagoService)
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-
-@app.get("/kg")
-async def get_kg(item: Item):
-    return get_extended_graph(item.graph, item.notation)
-    # return item
+    return {"graph": str(graph), "notation": graph.notation}

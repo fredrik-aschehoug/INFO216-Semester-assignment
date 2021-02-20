@@ -1,18 +1,20 @@
 from rdflib import Graph, URIRef, Literal, Namespace
 from rdflib.namespace import OWL
 import json
-from typing import Union, Any, List, Tuple
+from typing import Union, List, Tuple
 from services.YagoService import YagoService
-
-rdf_node = Union[Literal, URIRef]
+from api.models import Item, rdf_node
 
 
 class GraphService:
 
-    def __init__(self, raw: Union[str, object], notation: str):
-        self.notation = notation
-        self.graph = self.parse_input(raw, notation)
+    def __init__(self, params: Item):
+        self.notation = params.notation
+        self.graph = self.parse_input(params.graph, params.notation)
         self.graph.bind("yago3", Namespace("http://yago-knowledge.org/resource/"))
+
+    def __str__(self):
+        return self.graph.serialize(format=self.notation).decode("utf-8")
 
     @staticmethod
     def parse_input(raw: Union[str, object], notation: str) -> Graph:
@@ -58,9 +60,9 @@ class GraphService:
     def extend(self, service: YagoService) -> None:
         triples = list()
         for entity in self.get_entities():
-            yago_triples = service.get_triples(entity)
-            if (len(yago_triples) > 0):
-                triples.append({"entity": entity, "triples": yago_triples})
+            entity_triples = service.get_triples(entity)
+            if (len(entity_triples) > 0):
+                triples.append({"entity": entity, "triples": entity_triples})
 
         for entity in triples:
             self.graph.add((URIRef(entity["entity"]), OWL.sameAs, self.create_node(entity["triples"][0]["subject"])))
@@ -77,12 +79,3 @@ def get_objects(g):
        }""")
     for (obj,) in qres:
         print(obj)
-
-
-def get_extended_graph(raw, notation):
-    graphService = GraphService(raw, notation)
-    yagoService = YagoService()
-
-    graphService.extend(yagoService)
-
-    return graphService.get_graph_serialized()
