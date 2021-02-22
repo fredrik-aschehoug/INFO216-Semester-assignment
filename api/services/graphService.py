@@ -16,6 +16,10 @@ class GraphService:
         self.graph.bind("yago3", yago3)
         self.graph.bind("owl", OWL)
 
+        self.yagoService = YagoService()
+        self.yago_URIs = list()
+        self.wd_URIs = list()
+
     def __str__(self):
         return self.graph.serialize(format=self.notation).decode("utf-8")
 
@@ -60,19 +64,28 @@ class GraphService:
     def create_triple(self, triple: dict) -> Tuple[rdf_node, rdf_node, rdf_node]:
         return (self.create_node(triple["subject"]), self.create_node(triple["predicate"]), self.create_node(triple["object"]))
 
-    def extend(self, service: YagoService) -> None:
+    def extend_yago(self) -> None:
         triples = list()
         for entity in self.get_entities():
-            entity_triples = service.get_triples(entity)
+            entity_triples = self.yagoService.get_triples(entity)
             if (len(entity_triples) > 0):
                 triples.append({"entity": entity, "triples": entity_triples})
 
         for entity in triples:
-            self.graph.add((URIRef(entity["entity"]), OWL.sameAs, self.create_node(entity["triples"][0]["subject"])))
+            current_subject = entity["triples"][0]["subject"]
+            self.yago_URIs.append(current_subject["value"])
+            self.graph.add((URIRef(entity["entity"]), OWL.sameAs, self.create_node(current_subject)))
             for triple in entity["triples"]:
                 self.graph.add(self.create_triple(triple))
+
+    def extend_wd(self) -> None:
+        for uri in self.yago_URIs:
+            wd_uri = self.yagoService.get_wd_URI(uri)
+
+    def extend(self) -> None:
+        self.extend_yago()
+        self.extend_wd()
 
     def annotate_relations(self):
         relationService = RelationService(self.graph)
         self.graph = relationService.get_graph()
-

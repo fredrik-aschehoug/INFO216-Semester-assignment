@@ -1,4 +1,5 @@
 from services.QueryService import QueryService
+from typing import Union
 
 base_query = """PREFIX yago: <http://yago-knowledge.org/resource/>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
@@ -19,12 +20,12 @@ wikidata_query = """prefix owl: <http://www.w3.org/2002/07/owl#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 
 
-SELECT ?uri
+SELECT ?wd_uri
 WHERE {
-	yago3:Belgium owl:sameAs ?uri .
-  FILTER(STRSTARTS(STR(?uri), STR(wd:)))
+    <<yagoURI>> owl:sameAs ?wd_uri .
+    FILTER(STRSTARTS(STR(?wd_uri), STR(wd:)))
 }
-LIMIT 10"""
+LIMIT 1"""
 
 
 class YagoService(QueryService):
@@ -44,6 +45,9 @@ class YagoService(QueryService):
         results = self.execute_query(query)
         return results
 
-    def get_wikidata_URI(self):
-        query = wikidata_query.replace("<entity>", entity)
-        
+    def get_wd_URI(self, yago_URI) -> Union[str, None]:
+        query = wikidata_query.replace("<yagoURI>", yago_URI)
+        results = self.execute_query(query)
+
+        uri = (None, results[0].get("wd_uri", None).get("value", None))[len(results) == 1]
+        return uri
