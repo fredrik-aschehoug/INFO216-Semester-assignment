@@ -1,9 +1,9 @@
-from rdflib import Namespace, BNode
+from rdflib import BNode
 from rdflib.namespace import RDF
+from api.namespaces import nhterm
 
 
 class RelationService:
-    nhterm = Namespace("https://newshunter.uib.no/term#")
 
     def __init__(self, graph):
         self.graph = graph
@@ -22,10 +22,10 @@ class RelationService:
 
     def get_relations(self):
         qres = self.graph.query(
-            """SELECT ?item ?entity1 ?relation ?entity2
+            """SELECT DISTINCT ?item ?entity1 ?relation ?entity2
         WHERE {
-            ?item a nhterm:Item .
-            ?item nhterm:hasAnnotation ?annotation .
+            ?item a nhterm:Item ;
+                nhterm:hasAnnotation ?annotation .
             ?annotation nhterm:hasEntity ?entity1 .
             ?entity1 owl:sameAs ?entity_external .
             ?entity_external ?relation ?entity_external2 .
@@ -47,11 +47,12 @@ class RelationService:
 
     def add_relations(self, relations):
         for (item, entity1, relation, entity2) in relations:
-            annotation = BNode()
-            self.graph.add((annotation, RDF.type, self.nhterm.RelationAnnotation))
-            self.graph.add((annotation, self.nhterm.relationFrom, entity1))
-            self.graph.add((annotation, self.nhterm.relationTo, entity2))
-            self.graph.add((annotation, self.nhterm.hasRelation, relation))
+            relationAnnotation = BNode()
+            self.graph.add((item, nhterm.hasAnnotation, relationAnnotation))
+            self.graph.add((relationAnnotation, RDF.type, nhterm.RelationAnnotation))
+            self.graph.add((relationAnnotation, nhterm.relationFrom, entity1))
+            self.graph.add((relationAnnotation, nhterm.relationTo, entity2))
+            self.graph.add((relationAnnotation, nhterm.hasRelation, relation))
 
     def annotate_relations(self):
         for relations in self.item_relations.values():

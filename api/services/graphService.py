@@ -1,10 +1,11 @@
-from rdflib import Graph, URIRef, Literal, Namespace
+from rdflib import Graph, URIRef, Literal
 from rdflib.namespace import OWL
 import json
 from typing import Union, List, Tuple
 from services.YagoService import YagoService
 from services.RelationService import RelationService
 from api.models import Item, rdf_node
+from api.namespaces import yago3
 
 
 class GraphService:
@@ -12,7 +13,7 @@ class GraphService:
     def __init__(self, params: Item):
         self.notation = params.notation
         self.graph = self.parse_input(params.graph, params.notation)
-        self.graph.bind("yago3", Namespace("http://yago-knowledge.org/resource/"))
+        self.graph.bind("yago3", yago3)
         self.graph.bind("owl", OWL)
 
     def __str__(self):
@@ -75,13 +76,3 @@ class GraphService:
         relationService = RelationService(self.graph)
         self.graph = relationService.get_graph()
 
-
-def get_objects(g):
-    qres = g.query(
-        """SELECT DISTINCT ?object
-       WHERE {
-          ?subject ?predicate ?object .
-          FILTER(!isLiteral(?object))
-       }""")
-    for (obj,) in qres:
-        print(obj)
