@@ -15,10 +15,22 @@ WHERE {
   )
 }"""
 
+wikidata_query = """prefix owl: <http://www.w3.org/2002/07/owl#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+
+
+SELECT ?uri
+WHERE {
+	yago3:Belgium owl:sameAs ?uri .
+  FILTER(STRSTARTS(STR(?uri), STR(wd:)))
+}
+LIMIT 10"""
+
 
 class YagoService(QueryService):
 
-    endpoint_url = "https://imdb.uib.no/bg-yago3/namespace/yago3/sparql"
+    # endpoint_url = "https://imdb.uib.no/bg-yago3/namespace/yago3/sparql"
+    endpoint_url = "https://yago-knowledge.org/sparql/query"
 
     def __init__(self):
         super().__init__(self.endpoint_url)
@@ -28,7 +40,10 @@ class YagoService(QueryService):
         return base_query.replace("<entity>", entity)
 
     def get_triples(self, entity: str):
-        # print("Entity: %s" % entity)
         query = self.build_query(entity)
         results = self.execute_query(query)
         return results
+
+    def get_wikidata_URI(self):
+        query = wikidata_query.replace("<entity>", entity)
+        
