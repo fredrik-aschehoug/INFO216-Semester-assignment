@@ -1,5 +1,5 @@
 import sys
-from SPARQLWrapper import SPARQLWrapper, JSON, N3, RDFXML
+from SPARQLWrapper import SPARQLWrapper, JSON
 
 
 class QueryService:

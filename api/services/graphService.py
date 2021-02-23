@@ -1,11 +1,12 @@
-from rdflib import Graph, URIRef, Literal
+from rdflib import Graph, URIRef, Literal, BNode
 from rdflib.namespace import OWL
 import json
 from typing import Union, List, Tuple
 from services.YagoService import YagoService
+from services.WikidataService import WikidataService
 from services.RelationService import RelationService
 from api.models import Item, rdf_node
-from api.namespaces import yago3
+from api.namespaces import yago3, wd, p, wdt, schema, wdtn, wikibase, skos, wds
 
 
 class GraphService:
@@ -13,10 +14,19 @@ class GraphService:
     def __init__(self, params: Item):
         self.notation = params.notation
         self.graph = self.parse_input(params.graph, params.notation)
-        self.graph.bind("yago3", yago3)
         self.graph.bind("owl", OWL)
+        self.graph.bind("yago3", yago3)
+        self.graph.bind("wd", wd)
+        self.graph.bind("wdt", wdt)
+        self.graph.bind("wdtn", wdtn)
+        self.graph.bind("wikibase", wikibase)
+        self.graph.bind("wds", wds)
+        self.graph.bind("p", p)
+        self.graph.bind("schema", schema)
+        self.graph.bind("skos", skos)
 
         self.yagoService = YagoService()
+        self.wikidataService = WikidataService()
         self.yago_URIs = list()
         self.wd_URIs = list()
 
@@ -34,6 +44,7 @@ class GraphService:
         return g
 
     def get_graph(self) -> Graph:
+        """Return current rdflib Graph object"""
         return self.graph
 
     def get_graph_serialized(self, notation: str = None) -> str:
@@ -42,6 +53,7 @@ class GraphService:
         return self.graph.serialize(format=notation).decode("utf-8")
 
     def get_entities(self) -> List[str]:
+        """Run query against internal graph and return list of entity URIs"""
         qres = self.graph.query(
             """SELECT DISTINCT ?entity
         WHERE {
@@ -61,6 +73,9 @@ class GraphService:
                 return Literal(node["value"], datatype=URIRef(node["datatype"]))
             return Literal(node["value"])
 
+        if (node["type"] == "bnode"):
+            return BNode(node["value"])
+
     def create_triple(self, triple: dict) -> Tuple[rdf_node, rdf_node, rdf_node]:
         return (self.create_node(triple["subject"]), self.create_node(triple["predicate"]), self.create_node(triple["object"]))
 
@@ -73,14 +88,17 @@ class GraphService:
 
         for entity in triples:
             current_subject = entity["triples"][0]["subject"]
-            self.yago_URIs.append(current_subject["value"])
+            self.yago_URIs.append((entity["entity"], current_subject["value"]))
             self.graph.add((URIRef(entity["entity"]), OWL.sameAs, self.create_node(current_subject)))
             for triple in entity["triples"]:
                 self.graph.add(self.create_triple(triple))
 
     def extend_wd(self) -> None:
-        for uri in self.yago_URIs:
-            wd_uri = self.yagoService.get_wd_URI(uri)
+        for entity_uri, yago_uri in self.yago_URIs:
+            wd_uri = self.yagoService.get_wd_URI(yago_uri)
+            self.graph.add((URIRef(entity_uri), OWL.sameAs, URIRef(wd_uri)))
+            for triple in self.wikidataService.get_triples(wd_uri):
+                self.graph.add(self.create_triple(triple))
 
     def extend(self) -> None:
         self.extend_yago()

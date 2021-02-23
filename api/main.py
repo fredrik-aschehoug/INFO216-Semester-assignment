@@ -3,6 +3,7 @@ from services.graphService import GraphService
 from services.YagoService import YagoService
 from models import Item
 
+
 app = FastAPI()
 
 

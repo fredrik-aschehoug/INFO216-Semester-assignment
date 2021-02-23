@@ -1,31 +1,36 @@
 from services.QueryService import QueryService
 from typing import Union
+from string import Template
 
-base_query = """PREFIX yago: <http://yago-knowledge.org/resource/>
-prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+base_query = Template("""
+PREFIX yago: <http://yago-knowledge.org/resource/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX schema: <http://schema.org/>
 
 SELECT ?subject ?predicate ?object
 WHERE {
-  ?subject owl:sameAs <<entity>> .
+  ?subject owl:sameAs <$entity> .
   ?subject ?predicate ?object .
   FILTER(
     ?predicate != rdfs:label &&
     ?predicate != yago:redirectedFrom &&
     ?predicate != owl:sameAs &&
-    ?predicate != skos:prefLabel
+    ?predicate != skos:prefLabel &&
+    ?predicate != schema:sameAs
   )
-}"""
+}""")
 
-wikidata_query = """prefix owl: <http://www.w3.org/2002/07/owl#>
+wikidata_query = Template("""
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX wd: <http://www.wikidata.org/entity/>
-
 
 SELECT ?wd_uri
 WHERE {
-    <<yagoURI>> owl:sameAs ?wd_uri .
+    <$yago_URI> owl:sameAs ?wd_uri .
     FILTER(STRSTARTS(STR(?wd_uri), STR(wd:)))
 }
-LIMIT 1"""
+LIMIT 1""")
 
 
 class YagoService(QueryService):
@@ -36,17 +41,13 @@ class YagoService(QueryService):
     def __init__(self):
         super().__init__(self.endpoint_url)
 
-    @staticmethod
-    def build_query(entity: str):
-        return base_query.replace("<entity>", entity)
-
     def get_triples(self, entity: str):
-        query = self.build_query(entity)
+        query = base_query.substitute(entity=entity)
         results = self.execute_query(query)
         return results
 
     def get_wd_URI(self, yago_URI) -> Union[str, None]:
-        query = wikidata_query.replace("<yagoURI>", yago_URI)
+        query = wikidata_query.substitute(yago_URI=yago_URI)
         results = self.execute_query(query)
 
         uri = (None, results[0].get("wd_uri", None).get("value", None))[len(results) == 1]
