@@ -1,6 +1,6 @@
 from rdflib import BNode
 from rdflib.namespace import RDF
-from api.namespaces import nhterm
+from models.namespaces import nhterm
 
 
 class RelationService:

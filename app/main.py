@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends
+from models.models import Item
 from services.graphService import GraphService
 from services.YagoService import YagoService
-from models import Item
 
 
 app = FastAPI()

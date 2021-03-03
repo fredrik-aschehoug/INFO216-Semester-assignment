@@ -5,8 +5,8 @@ from typing import Union, List, Tuple
 from services.YagoService import YagoService
 from services.WikidataService import WikidataService
 from services.RelationService import RelationService
-from api.models import Item, rdf_node
-from api.namespaces import yago3, wd, p, wdt, schema, wdtn, wikibase, skos, wds
+from models.models import Item, rdf_node
+from models.namespaces import yago3, wd, p, wdt, schema, wdtn, wikibase, skos, wds
 
 
 class GraphService:
