@@ -1,12 +1,14 @@
 from rdflib import Graph, URIRef, Literal, BNode
 from rdflib.namespace import OWL
 import json
+import time
 from typing import Union, List, Tuple
 from services.YagoService import YagoService
 from services.WikidataService import WikidataService
 from services.RelationService import RelationService
 from models.models import Item, rdf_node
 from models.namespaces import yago3, wd, p, wdt, schema, wdtn, wikibase, skos, wds
+import asyncio
 
 
 class GraphService:
@@ -79,12 +81,11 @@ class GraphService:
     def create_triple(self, triple: dict) -> Tuple[rdf_node, rdf_node, rdf_node]:
         return (self.create_node(triple["subject"]), self.create_node(triple["predicate"]), self.create_node(triple["object"]))
 
-    def extend_yago(self) -> None:
+    async def add_yago_triples(self, entity_uri):
         triples = list()
-        for entity in self.get_entities():
-            entity_triples = self.yagoService.get_triples(entity)
-            if (len(entity_triples) > 0):
-                triples.append({"entity": entity, "triples": entity_triples})
+        entity_triples = await self.yagoService.get_triples(entity_uri)
+        if (len(entity_triples) > 0):
+            triples.append({"entity": entity_uri, "triples": entity_triples})
 
         for entity in triples:
             current_subject = entity["triples"][0]["subject"]
@@ -93,16 +94,31 @@ class GraphService:
             for triple in entity["triples"]:
                 self.graph.add(self.create_triple(triple))
 
-    def extend_wd(self) -> None:
+    async def extend_yago(self) -> None:
+        start_time = time.monotonic()
+        # for entity in self.get_entities():
+        #     await self.add_yago_triples(entity)
+        tasks = [self.add_yago_triples(entity) for entity in self.get_entities()]
+        await asyncio.gather(*tasks)
+        print(f"Time Taken:{time.monotonic() - start_time}")
+
+    async def add_wd_triples(self, subject_uri):
+        triples = await self.wikidataService.get_triples(subject_uri)
+        for triple in triples:
+            self.graph.add(self.create_triple(triple))
+
+    async def extend_wd(self) -> None:
+        wd_uris = list()
         for entity_uri, yago_uri in self.yago_URIs:
             wd_uri = self.yagoService.get_wd_URI(yago_uri)
             self.graph.add((URIRef(entity_uri), OWL.sameAs, URIRef(wd_uri)))
-            for triple in self.wikidataService.get_triples(wd_uri):
-                self.graph.add(self.create_triple(triple))
+            wd_uris.append(wd_uri)
+        tasks = [self.add_wd_triples(uri) for uri in wd_uris]
+        await asyncio.gather(*tasks)
 
-    def extend(self) -> None:
-        self.extend_yago()
-        self.extend_wd()
+    async def extend(self) -> None:
+        await self.extend_yago()
+        await self.extend_wd()
 
     def annotate_relations(self):
         relationService = RelationService(self.graph)

@@ -1,6 +1,7 @@
 from services.QueryService import QueryService
 from typing import Union
 from string import Template
+import asyncio
 
 
 base_query = Template("""
@@ -41,7 +42,7 @@ class YagoService(QueryService):
     def __init__(self):
         super().__init__(self.endpoint_url)
 
-    def get_triples(self, entity: str):
+    async def get_triples(self, entity: str):
         query = base_query.substitute(entity=entity)
         results = self.execute_query(query)
         return results

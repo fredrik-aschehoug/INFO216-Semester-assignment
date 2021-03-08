@@ -1,5 +1,6 @@
 from services.QueryService import QueryService
 from string import Template
+import asyncio
 
 
 base_query = Template("""
@@ -19,7 +20,7 @@ class WikidataService(QueryService):
     def __init__(self):
         super().__init__(self.endpoint_url)
 
-    def get_triples(self, uri: str):
+    async def get_triples(self, uri: str):
         def add_subject(row):
             row["subject"] = {"type": "uri", "value": uri}
             return row
