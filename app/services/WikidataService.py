@@ -25,5 +25,5 @@ class WikidataService(QueryService):
             row["subject"] = {"type": "uri", "value": uri}
             return row
         query = base_query.substitute(uri=uri)
-        results = self.execute_query(query)
+        results = await self.execute_query(query)
         return map(add_subject, results)

@@ -81,6 +81,16 @@ class GraphService:
     def create_triple(self, triple: dict) -> Tuple[rdf_node, rdf_node, rdf_node]:
         return (self.create_node(triple["subject"]), self.create_node(triple["predicate"]), self.create_node(triple["object"]))
 
+    @staticmethod
+    async def gather_with_concurrency(n, *tasks):
+        # Run n amount of tasks concurrently
+        semaphore = asyncio.Semaphore(n)
+
+        async def sem_task(task):
+            async with semaphore:
+                return await task
+        return await asyncio.gather(*(sem_task(task) for task in tasks))
+
     async def add_yago_triples(self, entity_uri):
         triples = list()
         entity_triples = await self.yagoService.get_triples(entity_uri)
@@ -95,12 +105,8 @@ class GraphService:
                 self.graph.add(self.create_triple(triple))
 
     async def extend_yago(self) -> None:
-        start_time = time.monotonic()
-        # for entity in self.get_entities():
-        #     await self.add_yago_triples(entity)
         tasks = [self.add_yago_triples(entity) for entity in self.get_entities()]
         await asyncio.gather(*tasks)
-        print(f"Time Taken:{time.monotonic() - start_time}")
 
     async def add_wd_triples(self, subject_uri):
         triples = await self.wikidataService.get_triples(subject_uri)
@@ -110,11 +116,12 @@ class GraphService:
     async def extend_wd(self) -> None:
         wd_uris = list()
         for entity_uri, yago_uri in self.yago_URIs:
-            wd_uri = self.yagoService.get_wd_URI(yago_uri)
+            wd_uri = await self.yagoService.get_wd_URI(yago_uri)
             self.graph.add((URIRef(entity_uri), OWL.sameAs, URIRef(wd_uri)))
             wd_uris.append(wd_uri)
         tasks = [self.add_wd_triples(uri) for uri in wd_uris]
-        await asyncio.gather(*tasks)
+        # Do concurrent request, but only 5 at a time
+        await self.gather_with_concurrency(5, *tasks)
 
     async def extend(self) -> None:
         await self.extend_yago()

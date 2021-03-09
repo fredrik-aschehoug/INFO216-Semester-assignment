@@ -1,18 +1,21 @@
 import sys
-from SPARQLWrapper import SPARQLWrapper, JSON
+from aiosparql.client import SPARQLClient
 
 
-class QueryService:
+class QueryService():
 
     # TODO adjust user agent; see https://w.wiki/CX6
     user_agent = "Python/%s.%s" % (sys.version_info[0], sys.version_info[1])
+    headers = {'User-Agent': user_agent}
 
     def __init__(self, endpoint_url):
         self.endpoint_url = endpoint_url
-        self.sparql = SPARQLWrapper(self.endpoint_url, agent=self.user_agent)
 
-    def execute_query(self, query):
-        self.sparql.setQuery(query)
-        self.sparql.setReturnFormat(JSON)
-        results = self.sparql.query().convert()
-        return results["results"]["bindings"]
+    def close(self):
+        self.client.close()
+
+    async def execute_query(self, query):
+        client = SPARQLClient(self.endpoint_url, headers=self.headers)
+        result = await client.query(query)
+        await client.close()
+        return result["results"]["bindings"]

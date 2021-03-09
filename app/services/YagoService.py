@@ -44,12 +44,12 @@ class YagoService(QueryService):
 
     async def get_triples(self, entity: str):
         query = base_query.substitute(entity=entity)
-        results = self.execute_query(query)
+        results = await self.execute_query(query)
         return results
 
-    def get_wd_URI(self, yago_URI) -> Union[str, None]:
+    async def get_wd_URI(self, yago_URI) -> Union[str, None]:
         query = wikidata_query.substitute(yago_URI=yago_URI)
-        results = self.execute_query(query)
+        results = await self.execute_query(query)
 
         uri = (None, results[0].get("wd_uri", None).get("value", None))[len(results) == 1]
         return uri
