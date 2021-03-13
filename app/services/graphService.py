@@ -6,12 +6,14 @@ from typing import Union, List, Tuple
 from services.YagoService import YagoService
 from services.WikidataService import WikidataService
 from services.RelationService import RelationService
+from services.UriService import UriService
+from services.AsyncService import AsyncService
 from models.models import Item, rdf_node
 from models.namespaces import yago3, wd, p, wdt, schema, wdtn, wikibase, skos, wds
 import asyncio
 
 
-class GraphService:
+class GraphService(AsyncService):
 
     def __init__(self, params: Item):
         self.notation = params.notation
@@ -29,7 +31,8 @@ class GraphService:
 
         self.yagoService = YagoService()
         self.wikidataService = WikidataService()
-        self.yago_URIs = list()
+        # Contains dictionaries used to map different URI's describing the same object
+        self.uri_maps = UriService()
         self.wd_URIs = list()
 
     def __str__(self):
@@ -81,34 +84,23 @@ class GraphService:
     def create_triple(self, triple: dict) -> Tuple[rdf_node, rdf_node, rdf_node]:
         return (self.create_node(triple["subject"]), self.create_node(triple["predicate"]), self.create_node(triple["object"]))
 
-    @staticmethod
-    async def gather_with_concurrency(n, *tasks):
-        """Run n amount of tasks concurrently"""
-        semaphore = asyncio.Semaphore(n)
-
-        async def sem_task(task):
-            async with semaphore:
-                return await task
-        return await asyncio.gather(*(sem_task(task) for task in tasks))
-
-    async def add_yago_triples(self, entity_uri) -> None:
-        entity_triples = await self.yagoService.get_triples(entity_uri)
-        if (len(entity_triples) == 0):
+    async def add_yago_triples(self, uri) -> None:
+        triples = await self.yagoService.get_triples(uri)
+        if (len(triples) == 0):
             return
 
-        subject = entity_triples[0]["subject"]
-        self.yago_URIs.append((entity_uri, subject["value"]))
+        subject = triples[0]["subject"]
 
         # Add triple: nhterm:Entity owl:sameAs yago3:Entity
-        self.graph.add((URIRef(entity_uri), OWL.sameAs, self.create_node(subject)))
+        self.graph.add((URIRef(uri), OWL.sameAs, self.create_node(subject)))
 
         # Add triples returned from Yago3
-        for triple in entity_triples:
+        for triple in triples:
             self.graph.add(self.create_triple(triple))
 
     async def extend_yago(self) -> None:
-        tasks = [self.add_yago_triples(entity) for entity in self.get_entities()]
-        await asyncio.gather(*tasks)
+        tasks = [self.add_yago_triples(uri_map["yago"]) for uri_map in self.uri_maps.maps]
+        await self.gather(tasks)
 
     async def add_wd_triples(self, subject_uri) -> None:
         triples = await self.wikidataService.get_triples(subject_uri)
@@ -116,18 +108,19 @@ class GraphService:
             self.graph.add(self.create_triple(triple))
 
     async def extend_wd(self) -> None:
-        wd_uris = list()
-        for entity_uri, yago_uri in self.yago_URIs:
-            wd_uri = await self.yagoService.get_wd_URI(yago_uri)
-            self.graph.add((URIRef(entity_uri), OWL.sameAs, URIRef(wd_uri)))
-            wd_uris.append(wd_uri)
-        tasks = [self.add_wd_triples(uri) for uri in wd_uris]
+        for uri_map in self.uri_maps.maps:
+            if (uri_map["wd"] is not None):
+                self.graph.add((URIRef(uri_map["entity"]), OWL.sameAs, URIRef(uri_map["wd"])))
+
         # Do concurrent request, but only 5 at a time
-        await self.gather_with_concurrency(5, *tasks)
+        tasks = [self.add_wd_triples(uri_map["wd"]) for uri_map in self.uri_maps.maps]
+        await self.gather_with_concurrency(5, tasks)
 
     async def extend(self) -> None:
-        await self.extend_yago()
-        await self.extend_wd()
+        self.uri_maps.add_entities(self.get_entities())
+        await self.uri_maps.add_yago_uris(self.yagoService.get_yago_URI)
+        await self.uri_maps.add_wd_uris(self.yagoService.get_wd_URI)
+        await self.gather([self.extend_yago(), self.extend_wd()])
 
     def annotate_relations(self) -> None:
         relationService = RelationService(self.graph)

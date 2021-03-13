@@ -6,7 +6,7 @@ import asyncio
 base_query = Template("""
 PREFIX wd: <http://www.wikidata.org/entity/>
 
-SELECT ?predicate ?object
+SELECT DISTINCT ?predicate ?object
 WHERE {
   <$uri> ?predicate ?object .
   FILTER(!isLiteral(?object) || lang(?object) = "" || langMatches(lang(?object), "en"))
