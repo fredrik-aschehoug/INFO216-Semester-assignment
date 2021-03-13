@@ -83,7 +83,7 @@ class GraphService:
 
     @staticmethod
     async def gather_with_concurrency(n, *tasks):
-        # Run n amount of tasks concurrently
+        """Run n amount of tasks concurrently"""
         semaphore = asyncio.Semaphore(n)
 
         async def sem_task(task):
@@ -91,24 +91,26 @@ class GraphService:
                 return await task
         return await asyncio.gather(*(sem_task(task) for task in tasks))
 
-    async def add_yago_triples(self, entity_uri):
-        triples = list()
+    async def add_yago_triples(self, entity_uri) -> None:
         entity_triples = await self.yagoService.get_triples(entity_uri)
-        if (len(entity_triples) > 0):
-            triples.append({"entity": entity_uri, "triples": entity_triples})
+        if (len(entity_triples) == 0):
+            return
 
-        for entity in triples:
-            current_subject = entity["triples"][0]["subject"]
-            self.yago_URIs.append((entity["entity"], current_subject["value"]))
-            self.graph.add((URIRef(entity["entity"]), OWL.sameAs, self.create_node(current_subject)))
-            for triple in entity["triples"]:
-                self.graph.add(self.create_triple(triple))
+        subject = entity_triples[0]["subject"]
+        self.yago_URIs.append((entity_uri, subject["value"]))
+
+        # Add triple: nhterm:Entity owl:sameAs yago3:Entity
+        self.graph.add((URIRef(entity_uri), OWL.sameAs, self.create_node(subject)))
+
+        # Add triples returned from Yago3
+        for triple in entity_triples:
+            self.graph.add(self.create_triple(triple))
 
     async def extend_yago(self) -> None:
         tasks = [self.add_yago_triples(entity) for entity in self.get_entities()]
         await asyncio.gather(*tasks)
 
-    async def add_wd_triples(self, subject_uri):
+    async def add_wd_triples(self, subject_uri) -> None:
         triples = await self.wikidataService.get_triples(subject_uri)
         for triple in triples:
             self.graph.add(self.create_triple(triple))
@@ -127,6 +129,6 @@ class GraphService:
         await self.extend_yago()
         await self.extend_wd()
 
-    def annotate_relations(self):
+    def annotate_relations(self) -> None:
         relationService = RelationService(self.graph)
         self.graph = relationService.get_graph()
