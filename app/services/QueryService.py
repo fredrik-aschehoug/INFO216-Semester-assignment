@@ -8,8 +8,9 @@ class QueryService():
     user_agent = "Python/%s.%s" % (sys.version_info[0], sys.version_info[1])
     headers = {'User-Agent': user_agent}
 
-    def __init__(self, endpoint_url):
+    def __init__(self, endpoint_url, triple_query):
         self.endpoint_url = endpoint_url
+        self.triple_query = triple_query
 
     def close(self):
         self.client.close()
@@ -19,3 +20,11 @@ class QueryService():
         result = await client.query(query)
         await client.close()
         return result["results"]["bindings"]
+
+    async def get_triples(self, uri: str):
+        def add_subject(row):
+            row["subject"] = {"type": "uri", "value": uri}
+            return row
+        query = self.triple_query.substitute(uri=uri)
+        results = await self.execute_query(query)
+        return list(map(add_subject, results))

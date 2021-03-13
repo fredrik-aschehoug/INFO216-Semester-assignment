@@ -4,7 +4,7 @@ from string import Template
 import asyncio
 
 
-base_query = Template("""
+TRIPLE_QUERY = Template("""
 PREFIX yago: <http://yago-knowledge.org/resource/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX schema: <http://schema.org/>
@@ -21,7 +21,7 @@ WHERE {
   )
 }""")
 
-yago_uri_query = Template("""
+YAGO_URI_QUERY = Template("""
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX yago3: <http://yago-knowledge.org/resource/>
 
@@ -32,7 +32,7 @@ WHERE {
 }
 LIMIT 1""")
 
-wikidata_uri_query = Template("""
+WIKIDATA_URI_QUERY = Template("""
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 
@@ -50,25 +50,20 @@ class YagoService(QueryService):
     endpoint_url = "https://yago-knowledge.org/sparql/query"
 
     def __init__(self):
-        super().__init__(self.endpoint_url)
+        super().__init__(self.endpoint_url, TRIPLE_QUERY)
 
-    async def get_triples(self, uri: str):
-        def add_subject(row):
-            row["subject"] = {"type": "uri", "value": uri}
-            return row
-        query = base_query.substitute(uri=uri)
+    async def get_external_URI(self, query, result_name):
         results = await self.execute_query(query)
-        return list(map(add_subject, results))
+
+        # Check if URI exist in the results object, default to None
+        result = results[0].get("wd_uri", None) if len(results) == 1 else None
+        uri = result.get("value", None) if result is not None else None
+        return uri
 
     async def get_yago_URI(self, entity) -> Union[str, None]:
-        query = yago_uri_query.substitute(entity=entity)
-        results = await self.execute_query(query)
-        uri = results[0].get("yago_uri", None).get("value", None) if len(results) == 1 else None
-        return uri
+        query = YAGO_URI_QUERY.substitute(entity=entity)
+        return await self.get_external_URI(query, "yago_uri")
 
     async def get_wd_URI(self, yago_URI) -> Union[str, None]:
-        query = wikidata_uri_query.substitute(yago_URI=yago_URI)
-        results = await self.execute_query(query)
-
-        uri = results[0].get("wd_uri", None).get("value", None) if len(results) == 1 else None
-        return uri
+        query = WIKIDATA_URI_QUERY.substitute(yago_URI=yago_URI)
+        return await self.get_external_URI(query, "wd_uri")
