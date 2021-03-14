@@ -1,6 +1,5 @@
 from services.QueryService import QueryService
 from string import Template
-import asyncio
 
 
 TRIPLE_QUERY = Template("""

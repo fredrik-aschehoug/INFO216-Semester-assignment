@@ -1,7 +1,6 @@
 from services.QueryService import QueryService
 from typing import Union
 from string import Template
-import asyncio
 
 
 TRIPLE_QUERY = Template("""

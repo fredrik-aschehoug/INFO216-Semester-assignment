@@ -1,7 +1,6 @@
 from fastapi import FastAPI, Depends
 from models.models import Item
-from services.graphService import GraphService
-from services.YagoService import YagoService
+from services.EnrichmentService import EnrichmentService
 # from fastapi_cprofile.profiler import CProfileMiddleware
 
 app = FastAPI()
@@ -9,8 +8,8 @@ app = FastAPI()
 
 
 @app.get("/", response_model=Item)
-async def get_extended_graph(graph: GraphService = Depends(GraphService)):
-    await graph.extend()
-    graph.annotate_relations()
+async def get_extended_graph(encricher: EnrichmentService = Depends(EnrichmentService)):
+    await encricher.extend()
+    encricher.annotate_relations()
 
-    return {"graph": str(graph), "notation": graph.notation}
+    return encricher.get_response()
