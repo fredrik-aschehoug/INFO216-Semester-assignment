@@ -1,4 +1,5 @@
 from services.QueryService import QueryService
+from config.config import settings
 from typing import Union
 from string import Template
 
@@ -44,18 +45,14 @@ LIMIT 1""")
 
 
 class YagoService(QueryService):
-
-    # endpoint_url = "https://imdb.uib.no/bg-yago3/namespace/yago3/sparql"
-    endpoint_url = "https://yago-knowledge.org/sparql/query"
-
     def __init__(self):
-        super().__init__(self.endpoint_url, TRIPLE_QUERY)
+        super().__init__(settings.yago_endpoint, TRIPLE_QUERY)
 
     async def get_external_URI(self, query, result_name):
         results = await self.execute_query(query)
 
         # Check if URI exist in the results object, default to None
-        result = results[0].get("wd_uri", None) if len(results) == 1 else None
+        result = results[0].get(result_name, None) if len(results) == 1 else None
         uri = result.get("value", None) if result is not None else None
         return uri
 

@@ -7,6 +7,7 @@ from services.RelationService import RelationService
 from services.UriService import UriService
 from services.AsyncService import AsyncService
 from models.models import Item
+from config.config import settings
 
 
 class EnrichmentService(AsyncService):
@@ -29,20 +30,20 @@ class EnrichmentService(AsyncService):
         subject = triples[0]["subject"]
 
         # Add triple: nhterm:Entity owl:sameAs yago3:Entity
-        self.graphService.add((URIRef(uri), OWL.sameAs, self.create_node(subject)))
+        self.graphService.add((URIRef(uri), OWL.sameAs, self.graphService.create_node(subject)))
 
         # Add triples returned from Yago3
         for triple in triples:
-            self.graphService.add(self.create_triple(triple))
+            self.graphService.add(self.graphService.create_triple(triple))
 
     async def extend_yago(self) -> None:
         tasks = [self.add_yago_triples(uri_map["yago"]) for uri_map in self.uriService.maps]
-        await self.gather(tasks)
+        await self.gather_with_concurrency(settings.yago_endpoint_max_connections, tasks)
 
     async def add_wd_triples(self, subject_uri) -> None:
         triples = await self.wikidataService.get_triples(subject_uri)
         for triple in triples:
-            self.graphService.add(self.create_triple(triple))
+            self.graphService.add(self.graphService.create_triple(triple))
 
     async def extend_wd(self) -> None:
         for uri_map in self.uriService.maps:
@@ -51,7 +52,7 @@ class EnrichmentService(AsyncService):
 
         # Do concurrent request, but only 5 at a time
         tasks = [self.add_wd_triples(uri_map["wd"]) for uri_map in self.uriService.maps]
-        await self.gather_with_concurrency(5, tasks)
+        await self.gather_with_concurrency(settings.wd_endpoint_max_connections, tasks)
 
     async def extend(self) -> None:
         self.uriService.add_entities(self.graphService.get_entities())

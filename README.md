@@ -5,3 +5,7 @@
 ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/aschehoug/info216-semester-assignment)
 ### Docker Pull Command
 `docker pull aschehoug/info216-semester-assignment`
+
+
+### Docker run
+`docker run -p 80:80 --env yago_endpoint=<yago4 endpoint url> <image name>`

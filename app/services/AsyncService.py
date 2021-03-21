@@ -9,6 +9,11 @@ class AsyncService:
     @staticmethod
     async def gather_with_concurrency(n, tasks):
         """Run n amount of tasks concurrently"""
+
+        # If unlimited concurrency
+        if (n == 0):
+            return await asyncio.gather(*tasks)
+
         semaphore = asyncio.Semaphore(n)
 
         async def sem_task(task):

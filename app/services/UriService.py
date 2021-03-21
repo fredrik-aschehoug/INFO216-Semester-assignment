@@ -1,4 +1,5 @@
 from services.AsyncService import AsyncService
+from config.config import settings
 
 
 class UriService(AsyncService):
@@ -28,8 +29,8 @@ class UriService(AsyncService):
 
     async def add_yago_uris(self, service):
         uri_tasks = [self.extend_uri_map(uri_map, service, "entity", "yago") for uri_map in self._maps]
-        self._maps = await self.gather(uri_tasks)
+        self._maps = await self.gather_with_concurrency(settings.yago_endpoint_max_connections, uri_tasks)
 
     async def add_wd_uris(self, service):
         uri_tasks = [self.extend_uri_map(uri_map, service, "yago", "wd") for uri_map in self._maps]
-        self._maps = await self.gather(uri_tasks)
+        self._maps = await self.gather_with_concurrency(settings.yago_endpoint_max_connections, uri_tasks)

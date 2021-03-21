@@ -1,4 +1,5 @@
 from services.QueryService import QueryService
+from config.config import settings
 from string import Template
 
 
@@ -14,7 +15,5 @@ WHERE {
 
 
 class WikidataService(QueryService):
-    endpoint_url = "https://query.wikidata.org/sparql"
-
     def __init__(self):
-        super().__init__(self.endpoint_url, TRIPLE_QUERY)
+        super().__init__(settings.wd_endpoint, TRIPLE_QUERY)
