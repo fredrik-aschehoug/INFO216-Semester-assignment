@@ -2,6 +2,7 @@ from services.QueryService import QueryService
 from config.config import settings
 from typing import Union
 from string import Template
+from async_lru import alru_cache
 
 
 TRIPLE_QUERY = Template("""
@@ -13,12 +14,12 @@ SELECT DISTINCT ?predicate ?object
 WHERE {
   <$uri> ?predicate ?object .
   FILTER(
-    ?predicate != rdfs:label &&
     ?predicate != yago:redirectedFrom &&
     ?predicate != owl:sameAs &&
     ?predicate != skos:prefLabel &&
     ?predicate != schema:sameAs
   )
+  FILTER(!isLiteral(?object) || lang(?object) = "" || langMatches(lang(?object), "en"))
 }""")
 
 YAGO_URI_QUERY = Template("""
@@ -48,6 +49,7 @@ class YagoService(QueryService):
     def __init__(self):
         super().__init__(settings.yago_endpoint, TRIPLE_QUERY)
 
+    @alru_cache
     async def get_external_URI(self, query, result_name):
         results = await self.execute_query(query)
 

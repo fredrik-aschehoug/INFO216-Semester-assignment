@@ -7,5 +7,5 @@
 `docker pull aschehoug/info216-semester-assignment`
 
 
-### Docker run
-`docker run -p 80:80 --env yago_endpoint=<yago4 endpoint url> <image name>`
+### Docker run example
+`docker run -p 80:80 --env yago_endpoint=https://yago-knowledge.org/sparql/query --env yago_endpoint_max_connections=100 --env wd_endpoint=https://query.wikidata.org/sparql --env wd_endpoint_max_connections=5 fastapi`

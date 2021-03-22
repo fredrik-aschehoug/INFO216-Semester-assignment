@@ -1,5 +1,6 @@
 import sys
 from aiosparql.client import SPARQLClient
+from async_lru import alru_cache
 
 
 class QueryService():
@@ -21,6 +22,7 @@ class QueryService():
         await client.close()
         return result["results"]["bindings"]
 
+    @alru_cache
     async def get_triples(self, uri: str):
         def add_subject(row):
             row["subject"] = {"type": "uri", "value": uri}
