@@ -22,22 +22,22 @@ class EnrichmentService(AsyncService):
     def get_response(self) -> str:
         return {"graph": self.graphService.get_graph_serialized(), "notation": self.graphService.notation}
 
-    async def add_yago_triples(self, uri) -> None:
-        triples = await self.yagoService.get_triples(uri)
+    async def add_yago_triples(self, yago_uri, entity) -> None:
+        triples = await self.yagoService.get_triples(yago_uri)
         if (len(triples) == 0):
             return
 
         subject = triples[0]["subject"]
 
         # Add triple: nhterm:Entity owl:sameAs yago3:Entity
-        self.graphService.add((URIRef(uri), OWL.sameAs, self.graphService.create_node(subject)))
+        self.graphService.add((URIRef(entity), OWL.sameAs, self.graphService.create_node(subject)))
 
         # Add triples returned from Yago3
         for triple in triples:
             self.graphService.add(self.graphService.create_triple(triple))
 
     async def extend_yago(self) -> None:
-        tasks = [self.add_yago_triples(uri_map["yago"]) for uri_map in self.uriService.maps]
+        tasks = [self.add_yago_triples(uri_map["yago"], uri_map["entity"]) for uri_map in self.uriService.maps]
         await self.gather_with_concurrency(settings.yago_endpoint_max_connections, tasks)
 
     async def add_wd_triples(self, subject_uri) -> None:
