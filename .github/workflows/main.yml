@@ -39,7 +39,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: aschehoug/KG-Enricher:latest
+          tags: aschehoug/kg-enricher:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
