@@ -18,6 +18,7 @@ class EnrichmentService(AsyncService):
         self.yagoService = YagoService()
         self.wikidataService = WikidataService()
         self.uriService = UriService()
+        self.relationService = RelationService(self.graphService.graph)
 
     def get_response(self) -> str:
         return {"graph": self.graphService.get_graph_serialized(), "notation": self.graphService.notation}
@@ -61,5 +62,4 @@ class EnrichmentService(AsyncService):
         await self.gather([self.extend_yago(), self.extend_wd()])
 
     def annotate_relations(self) -> None:
-        relationService = RelationService(self.graphService.graph)
-        self.graphService.graph = relationService.get_graph()
+        self.relationService.annotate_relations()

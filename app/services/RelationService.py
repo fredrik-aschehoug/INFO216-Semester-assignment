@@ -1,16 +1,13 @@
-from rdflib import BNode
+from rdflib import BNode, URIRef
 from rdflib.namespace import RDF
 from models.namespaces import nhterm
 
 
 class RelationService:
+    ANNOTATOR = URIRef("https://www.wikidata.org/wiki/Q106226082")
 
     def __init__(self, graph):
         self.graph = graph
-        self.items = self.get_items()
-        self.relations = self.get_relations()
-        self.item_relations = self.compile_item_relations()
-        self.annotate_relations()
 
     def get_items(self):
         qres = self.graph.query(
@@ -50,11 +47,15 @@ class RelationService:
             relationAnnotation = BNode()
             self.graph.add((item, nhterm.hasAnnotation, relationAnnotation))
             self.graph.add((relationAnnotation, RDF.type, nhterm.RelationAnnotation))
+            self.graph.add((relationAnnotation, nhterm.hasAnnotator, self.ANNOTATOR))
             self.graph.add((relationAnnotation, nhterm.relationFrom, entity1))
             self.graph.add((relationAnnotation, nhterm.relationTo, entity2))
             self.graph.add((relationAnnotation, nhterm.hasRelation, relation))
 
     def annotate_relations(self):
+        self.items = self.get_items()
+        self.relations = self.get_relations()
+        self.item_relations = self.compile_item_relations()
         for relations in self.item_relations.values():
             self.add_relations(relations)
 
