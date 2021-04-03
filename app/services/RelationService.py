@@ -1,6 +1,8 @@
 from rdflib import BNode, URIRef
-from rdflib.namespace import RDF
+from rdflib.namespace import RDF, OWL
+from rdflib.plugins.sparql import prepareQuery
 from models.namespaces import nhterm
+from typing import Generator
 
 
 class RelationService:
@@ -9,16 +11,26 @@ class RelationService:
     def __init__(self, graph):
         self.graph = graph
 
-    def get_items(self):
+    def _get_items(self) -> Generator[URIRef, None, None]:
+        """Generator which yields all item identifiers in the graph"""
+
         qres = self.graph.query(
             """SELECT DISTINCT ?item
         WHERE {
             ?item a nhterm:Item .
         }""")
-        return [str(item) for (item,) in qres]
 
-    def get_relations(self):
-        qres = self.graph.query(
+        for (item,) in qres:
+            yield item
+
+    def _get_relations(self, item):
+        """
+        Get regular 1:1 relations between two entities whitin the same item.
+        TODO: refine query to only include external entity from same item
+        Return rdflib.query.Result in the following format: (item, entity1, relation, entity2)
+        """
+
+        query = prepareQuery(
             """SELECT DISTINCT ?item ?entity1 ?relation ?entity2
         WHERE {
             ?item a nhterm:Item ;
@@ -27,22 +39,30 @@ class RelationService:
             ?entity1 owl:sameAs ?entity_external .
             ?entity_external ?relation ?entity_external2 .
             ?entity2 owl:sameAs ?entity_external2 .
+        }""", initNs={"nhterm": nhterm, "owl": OWL})
+        qres = self.graph.query(query, initBindings={'item': item})
+        return qres
+
+    def _get_common_relations(self):
+        """Get entities that share a common property"""
+
+        qres = self.graph.query(
+            """SELECT DISTINCT ?item ?entity1 ?relation ?entity2
+        WHERE {
+            ?item a nhterm:Item ;
+                nhterm:hasAnnotation ?annotation .
+            ?annotation nhterm:hasEntity ?entity1 .
+            ?entity1 owl:sameAs ?entity_external .
+            ?entity_external ?relation ?something1 .
+            ?entity_external2 ?relation ?something2 .
+            ?entity2 owl:sameAs ?entity_external2 .
         }""")
 
         return qres
 
-    def get_item_relations(self, item):
-        def filter_relations(relation: str):
-            if str(relation[0]) == item:
-                return True
-            return False
+    def _add_relations(self, relations):
+        """Add the relations to the internal graph"""
 
-        return list(filter(filter_relations, self.relations))
-
-    def compile_item_relations(self):
-        return {item: self.get_item_relations(item) for item in self.items}
-
-    def add_relations(self, relations):
         for (item, entity1, relation, entity2) in relations:
             relationAnnotation = BNode()
             self.graph.add((item, nhterm.hasAnnotation, relationAnnotation))
@@ -53,11 +73,6 @@ class RelationService:
             self.graph.add((relationAnnotation, nhterm.hasRelation, relation))
 
     def annotate_relations(self):
-        self.items = self.get_items()
-        self.relations = self.get_relations()
-        self.item_relations = self.compile_item_relations()
-        for relations in self.item_relations.values():
-            self.add_relations(relations)
-
-    def get_graph(self):
-        return self.graph
+        for item in self._get_items():
+            relations = self._get_relations(item)
+            self._add_relations(relations)
