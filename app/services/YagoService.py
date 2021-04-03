@@ -10,9 +10,9 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX schema: <http://schema.org/>
 
-SELECT DISTINCT ?predicate ?object
+SELECT DISTINCT ?subject ?predicate ?object
 WHERE {
-  <$uri> ?predicate ?object .
+  ?subject ?predicate ?object .
   FILTER(
     ?predicate != yago:redirectedFrom &&
     ?predicate != owl:sameAs &&
@@ -20,6 +20,7 @@ WHERE {
     ?predicate != schema:sameAs
   )
   FILTER(!isLiteral(?object) || lang(?object) = "" || langMatches(lang(?object), "en"))
+  BIND(<$uri> AS ?subject)
 }""")
 
 YAGO_URI_QUERY = Template("""

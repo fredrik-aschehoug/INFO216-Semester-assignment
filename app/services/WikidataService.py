@@ -6,10 +6,11 @@ from string import Template
 TRIPLE_QUERY = Template("""
 PREFIX wd: <http://www.wikidata.org/entity/>
 
-SELECT DISTINCT ?predicate ?object
+SELECT DISTINCT ?subject ?predicate ?object
 WHERE {
-  <$uri> ?predicate ?object .
+  ?subject ?predicate ?object .
   FILTER(!isLiteral(?object) || lang(?object) = "" || langMatches(lang(?object), "en"))
+  BIND(<$uri> AS ?subject)
 }
 """)
 

@@ -24,9 +24,5 @@ class QueryService():
 
     @alru_cache
     async def get_triples(self, uri: str):
-        def add_subject(row):
-            row["subject"] = {"type": "uri", "value": uri}
-            return row
         query = self.triple_query.substitute(uri=uri)
-        results = await self.execute_query(query)
-        return list(map(add_subject, results))
+        return await self.execute_query(query)
