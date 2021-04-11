@@ -1,16 +1,27 @@
-from rdflib import Graph, URIRef, Literal, BNode
-from rdflib.namespace import OWL
 import json
-from typing import Union, List, Tuple
-from models.models import rdf_node
-from models.namespaces import yago3, wd, p, wdt, schema, wdtn, wikibase, skos, wds
+from typing import List, Tuple, Union, Generator
+from rdflib import BNode, Graph, Literal, URIRef
+from rdflib.namespace import OWL
+
+from models.namespaces import p, schema, skos, wd, wds, wdt, wdtn, wikibase, yago3
+from models.types import rdf_node
+
+
+GET_ENTITIES_QUERY = """
+SELECT DISTINCT ?entity
+WHERE {
+    ?subject nhterm:hasEntity ?entity .
+}
+"""
 
 
 class GraphService():
-
+    """Service which contains the rdflib graph and some helper methods related to graph operations."""
     def __init__(self, graph, notation):
         self._notation = notation
-        self._graph = self.parse_input(graph, notation)
+        self._graph = self._parse_input(graph, notation)
+
+        # Bind namespaces
         self._graph.bind("owl", OWL)
         self._graph.bind("yago3", yago3)
         self._graph.bind("wd", wd)
@@ -23,7 +34,7 @@ class GraphService():
         self._graph.bind("skos", skos)
 
     @staticmethod
-    def parse_input(raw: Union[str, object], notation: str) -> Graph:
+    def _parse_input(raw: Union[str, object], notation: str) -> Graph:
         g = Graph()
 
         if (notation == "json-ld"):
@@ -42,31 +53,30 @@ class GraphService():
         return self._graph
 
     @graph.setter
-    def graph(self, g):
+    def graph(self, g: Graph) -> None:
         """Set current rdflib Graph object"""
         self._graph = g
 
     def get_graph_serialized(self, notation: str = None) -> str:
+        """Return a serialized version of the graph."""
         if (notation is None):
             notation = self._notation
         return self._graph.serialize(format=notation).decode("utf-8")
 
-    def get_entities(self) -> List[str]:
-        """Run query against internal graph and return list of entity URIs"""
-        qres = self._graph.query(
-            """SELECT DISTINCT ?entity
-        WHERE {
-            ?subject nhterm:hasEntity ?entity .
-        }""")
+    def get_entities(self) -> Generator[str, None, None]:
+        """Generator which yields all entity URIs in the graph"""
+        qres = self._graph.query(GET_ENTITIES_QUERY)
 
-        entities = set([str(entity) for (entity,) in qres])
-        return list(entities)
+        for (entity,) in qres:
+            yield str(entity)
 
-    def add(self, triple: tuple):
+    def add(self, triple: tuple) -> None:
+        """Add a triple to the graph."""
         self._graph.add(triple)
 
     @staticmethod
     def create_node(node: dict) -> rdf_node:
+        """Convert a SPARQL result dictionary to an rdflib node."""
         if (node["type"] == "uri"):
             return URIRef(node["value"])
 
@@ -79,4 +89,5 @@ class GraphService():
             return BNode(node["value"])
 
     def create_triple(self, triple: dict) -> Tuple[rdf_node, rdf_node, rdf_node]:
+        """Convert a SPARQL result row to rdflib nodes in a tuple, ready to be added to the graph."""
         return (self.create_node(triple["subject"]), self.create_node(triple["predicate"]), self.create_node(triple["object"]))

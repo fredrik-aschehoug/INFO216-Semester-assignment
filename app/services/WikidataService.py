@@ -1,6 +1,7 @@
-from services.QueryService import QueryService
-from config.config import settings
 from string import Template
+
+from config.config import settings
+from services.QueryService import QueryService
 
 
 TRIPLE_QUERY = Template("""
@@ -16,5 +17,6 @@ WHERE {
 
 
 class WikidataService(QueryService):
+    """Service used to query the wd_endpoint"""
     def __init__(self):
         super().__init__(settings.wd_endpoint, TRIPLE_QUERY)

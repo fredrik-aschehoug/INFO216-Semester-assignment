@@ -1,8 +1,8 @@
-from config.config import settings
-from models.models import Item
 from rdflib import URIRef
 from rdflib.namespace import OWL
 
+from config.config import settings
+from models.models import Item
 from services.AsyncService import AsyncService
 from services.GraphService import GraphService
 from services.RelationService import RelationService

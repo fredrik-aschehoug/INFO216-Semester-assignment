@@ -1,10 +1,11 @@
-from rdflib import BNode, URIRef, Literal, Graph
+from typing import Generator
+from rdflib import BNode, Graph, Literal, URIRef
 from rdflib.collection import Collection
-from rdflib.namespace import RDF, OWL
+from rdflib.namespace import OWL, RDF
 from rdflib.plugins.sparql import prepareQuery
 from rdflib.plugins.sparql.processor import SPARQLResult
+
 from models.namespaces import nhterm
-from typing import Generator
 
 
 GET_ITEMS_QUERY = """
@@ -44,6 +45,7 @@ WHERE {
 
 
 class RelationService:
+    """Service used to add RelationAnnotations to the result"""
     ANNOTATOR = URIRef("https://www.wikidata.org/wiki/Q106226082")
 
     def __init__(self, graph: Graph):

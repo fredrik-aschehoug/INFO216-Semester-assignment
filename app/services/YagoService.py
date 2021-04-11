@@ -1,8 +1,9 @@
-from services.QueryService import QueryService
-from config.config import settings
-from typing import Union
-from string import Template
 from async_lru import alru_cache
+from string import Template
+from typing import Union
+
+from config.config import settings
+from services.QueryService import QueryService
 
 
 TRIPLE_QUERY = Template("""
@@ -47,11 +48,16 @@ LIMIT 1""")
 
 
 class YagoService(QueryService):
+    """Service used to query the yago_endpoint"""
     def __init__(self):
         super().__init__(settings.yago_endpoint, TRIPLE_QUERY)
 
     @alru_cache
-    async def get_external_URI(self, query, result_name):
+    async def _get_external_URI(self, query: str, result_name: str) -> Union[str, None]:
+        """
+        Query the SPARQL endpoint with the supplied query.
+        From the query result, take the first row and return the variable named result_name if it exists.
+        """
         results = await self.execute_query(query)
 
         # Check if URI exist in the results object, default to None
@@ -59,10 +65,12 @@ class YagoService(QueryService):
         uri = result.get("value", None) if result is not None else None
         return uri
 
-    async def get_yago_URI(self, entity) -> Union[str, None]:
+    async def get_yago_URI(self, entity: str) -> Union[str, None]:
+        """Given a nhterm:Entity, fetch the corresponding yago uri and return it if it exists."""
         query = YAGO_URI_QUERY.substitute(entity=entity)
-        return await self.get_external_URI(query, "yago_uri")
+        return await self._get_external_URI(query, "yago_uri")
 
-    async def get_wd_URI(self, yago_URI) -> Union[str, None]:
+    async def get_wd_URI(self, yago_URI: str) -> Union[str, None]:
+        """Given a yago uri, fetch the corresponding wikidata uri and return it if it exists."""
         query = WIKIDATA_URI_QUERY.substitute(yago_URI=yago_URI)
-        return await self.get_external_URI(query, "wd_uri")
+        return await self._get_external_URI(query, "wd_uri")
