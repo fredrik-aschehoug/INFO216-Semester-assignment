@@ -18,13 +18,12 @@ WHERE {
 GET_RELATIONS_QUERY = """
 SELECT DISTINCT ?item ?entity1 ?relation ?entity2
 WHERE {
-    ?item nhterm:hasAnnotation ?annotation .
-    ?annotation nhterm:hasEntity ?entity1 .
-    ?entity1 owl:sameAs ?entity_external .
-    ?entity_external ?relation ?entity_external2 .
-    ?entity2 owl:sameAs ?entity_external2 .
-    ?annotation2 nhterm:hasEntity ?entity2 .
-    ?item nhterm:hasAnnotation ?annotation2 .
+  ?item nhterm:hasAnnotation/nhterm:hasEntity ?entity1 .
+  ?item nhterm:hasAnnotation/nhterm:hasEntity ?entity2 .
+  ?entity1 owl:sameAs ?entity_external1 .
+  ?entity2 owl:sameAs ?entity_external2 .
+
+  ?entity_external1 ?relation ?entity_external2 .
 }
 """
 
