@@ -16,6 +16,20 @@ WHERE {
 }
 """
 
+ASK_ITEM_QUERY = """
+ASK {
+    ?item a nhterm:Item .
+}
+"""
+
+ASK_ENTITY_QUERY = """
+ASK {
+    ?item a nhterm:Item .
+    ?item nhterm:hasAnnotation/nhterm:hasEntity ?entity .
+    ?entity a nhterm:Entity .
+}
+"""
+
 
 class GraphService():
     """Service which contains the rdflib graph and some helper methods related to graph operations."""
@@ -69,6 +83,20 @@ class GraphService():
         if (notation is None):
             notation = self._notation
         return self._graph.serialize(format=notation).decode("utf-8")
+
+    def validate_graph(self) -> None:
+        """
+        Validate that the graph has at least one item with at least one entity.
+        Throw HTTP500 if not.
+        """
+        has_item = self._graph.query(ASK_ITEM_QUERY).askAnswer
+        has_entity = self._graph.query(ASK_ENTITY_QUERY).askAnswer
+
+        if (has_item is False):
+            raise HTTPException(status_code=500, detail="The provided graph does not contain any news items.")
+
+        if (has_entity is False):
+            raise HTTPException(status_code=500, detail="The provided graph does not contain any entities.")
 
     def get_entities(self) -> Generator[str, None, None]:
         """Generator which yields all entity URIs in the graph."""

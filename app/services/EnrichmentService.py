@@ -51,6 +51,7 @@ class EnrichmentService(AsyncService):
         await self.gather_with_concurrency(settings.wd_endpoint_max_connections, tasks)
 
     async def extend(self) -> None:
+        self.graphService.validate_graph()
         self.uriService.add_entities(self.graphService.get_entities())
         await self.uriService.add_yago_uris(self.yagoService.get_yago_URI)
         await self.uriService.add_wd_uris(self.yagoService.get_wd_URI)
