@@ -11,7 +11,7 @@ class UriService(AsyncService):
 
     If we assume that the following statement is true:
     dbpedia:Belgium a nhterm:Entity ;
-        owl:sameAs wd:Q31, yago3:Belgium .
+        owl:sameAs wd:Q31, yago4:Belgium .
 
     We want to store this information in this service, in a dictionary:
     {

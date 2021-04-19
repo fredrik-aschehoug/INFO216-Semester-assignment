@@ -2,7 +2,7 @@ from rdflib import Namespace
 
 
 nhterm = Namespace("https://newshunter.uib.no/term#")
-yago3 = Namespace("http://yago-knowledge.org/resource/")
+yago4 = Namespace("http://yago-knowledge.org/resource/")
 
 # Wikidata prefixes https://www.wikidata.org/wiki/EntitySchema:E49
 wd = Namespace("http://www.wikidata.org/entity/")

@@ -26,12 +26,12 @@ WHERE {
 
 YAGO_URI_QUERY = Template("""
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX yago3: <http://yago-knowledge.org/resource/>
+PREFIX yago4: <http://yago-knowledge.org/resource/>
 
 SELECT ?yago_uri
 WHERE {
     ?yago_uri owl:sameAs <$entity> .
-    FILTER(STRSTARTS(STR(?yago_uri), STR(yago3:)))
+    FILTER(STRSTARTS(STR(?yago_uri), STR(yago4:)))
 }
 LIMIT 1""")
 

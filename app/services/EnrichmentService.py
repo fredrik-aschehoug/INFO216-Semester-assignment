@@ -2,7 +2,7 @@ from rdflib import URIRef
 from rdflib.namespace import OWL
 
 from config.config import settings
-from models.models import Item
+from models.models import RequestModel
 from services.AsyncService import AsyncService
 from services.GraphService import GraphService
 from services.RelationService import RelationService
@@ -17,9 +17,9 @@ class EnrichmentService(AsyncService):
     This class should be injected as a dependency in a FastAPI route.
     """
 
-    def __init__(self, params: Item):
+    def __init__(self, params: RequestModel):
         # Register services
-        self.graphService = GraphService(params.graph, params.notation)
+        self.graphService = GraphService(params.graph, params.in_notation, params.out_notation)
         self.yagoService = YagoService()
         self.wikidataService = WikidataService()
         self.uriService = UriService()
