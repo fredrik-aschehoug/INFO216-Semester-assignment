@@ -45,15 +45,15 @@ WHERE {
 
 class RelationService:
     """Service used to add RelationAnnotations to the result"""
-    ANNOTATOR = URIRef("https://www.wikidata.org/wiki/Q106226082")
+    _ANNOTATOR = URIRef("https://www.wikidata.org/wiki/Q106226082")
 
     def __init__(self, graph: Graph):
-        self.graph = graph
+        self._graph = graph
 
     def _get_items(self) -> Generator[URIRef, None, None]:
         """Generator which yields all item identifiers in the graph"""
 
-        qres = self.graph.query(GET_ITEMS_QUERY)
+        qres = self._graph.query(GET_ITEMS_QUERY)
 
         for (item,) in qres:
             yield item
@@ -65,14 +65,14 @@ class RelationService:
         """
 
         query = prepareQuery(GET_RELATIONS_QUERY, initNs={"nhterm": nhterm, "owl": OWL})
-        qres = self.graph.query(query, initBindings={'item': item})
+        qres = self._graph.query(query, initBindings={'item': item})
         return qres
 
     def _get_pc_relations(self, item: URIRef) -> SPARQLResult:
         """Get entities that share a common property and object"""
 
         query = prepareQuery(GET_PC_RELATIONS_QUERY, initNs={"nhterm": nhterm, "owl": OWL})
-        qres = self.graph.query(query, initBindings={'item': item})
+        qres = self._graph.query(query, initBindings={'item': item})
         return qres
 
     @staticmethod
@@ -142,27 +142,27 @@ class RelationService:
 
         for item in prepared_relations.values():
             relationAnnotation = BNode()
-            self.graph.add((item["item"], nhterm.hasAnnotation, relationAnnotation))
-            self.graph.add((relationAnnotation, RDF.type, nhterm.RelationAnnotation))
-            self.graph.add((relationAnnotation, nhterm.hasAnnotator, self.ANNOTATOR))
-            self.graph.add((relationAnnotation, nhterm.relationType, nhterm.sharedPredicateObjectRelation))
-            self.graph.add((relationAnnotation, nhterm.predicate, item["predicate"]))
-            self.graph.add((relationAnnotation, nhterm.object, item["obj"]))
+            self._graph.add((item["item"], nhterm.hasAnnotation, relationAnnotation))
+            self._graph.add((relationAnnotation, RDF.type, nhterm.RelationAnnotation))
+            self._graph.add((relationAnnotation, nhterm.hasAnnotator, self._ANNOTATOR))
+            self._graph.add((relationAnnotation, nhterm.relationType, nhterm.sharedPredicateObjectRelation))
+            self._graph.add((relationAnnotation, nhterm.predicate, item["predicate"]))
+            self._graph.add((relationAnnotation, nhterm.object, item["obj"]))
             entities = BNode()
-            self.graph.add((relationAnnotation, nhterm.entities, entities))
-            Collection(self.graph, entities, list(item["entities"]))
+            self._graph.add((relationAnnotation, nhterm.entities, entities))
+            Collection(self._graph, entities, list(item["entities"]))
 
     def _add_relations(self, relations: SPARQLResult) -> None:
         """Add the relations to the internal graph"""
         for (item, entity1, relation, entity2) in relations:
             relationAnnotation = BNode()
-            self.graph.add((item, nhterm.hasAnnotation, relationAnnotation))
-            self.graph.add((relationAnnotation, RDF.type, nhterm.RelationAnnotation))
-            self.graph.add((relationAnnotation, nhterm.hasAnnotator, self.ANNOTATOR))
-            self.graph.add((relationAnnotation, nhterm.relationType, nhterm.standardRelation))
-            self.graph.add((relationAnnotation, nhterm.relationFrom, entity1))
-            self.graph.add((relationAnnotation, nhterm.relationTo, entity2))
-            self.graph.add((relationAnnotation, nhterm.hasRelation, relation))
+            self._graph.add((item, nhterm.hasAnnotation, relationAnnotation))
+            self._graph.add((relationAnnotation, RDF.type, nhterm.RelationAnnotation))
+            self._graph.add((relationAnnotation, nhterm.hasAnnotator, self._ANNOTATOR))
+            self._graph.add((relationAnnotation, nhterm.relationType, nhterm.standardRelation))
+            self._graph.add((relationAnnotation, nhterm.relationFrom, entity1))
+            self._graph.add((relationAnnotation, nhterm.relationTo, entity2))
+            self._graph.add((relationAnnotation, nhterm.hasRelation, relation))
 
     def annotate_relations(self) -> None:
         for item in self._get_items():

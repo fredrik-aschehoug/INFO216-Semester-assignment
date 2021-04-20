@@ -3,5 +3,6 @@
 Lib/
 Scripts/
 Include/
-
 dev.env
+*.dot
+*.png
