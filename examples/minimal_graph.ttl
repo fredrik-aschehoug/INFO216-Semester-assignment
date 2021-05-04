@@ -1,0 +1,11 @@
+@prefix nh: <https://newshunter.uib.no/resource#> .
+@prefix nhterm: <https://newshunter.uib.no/term#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+nh:fd916bac-206b-4230-8e71-84d6a27948cd a nhterm:Item ;
+    nhterm:hasAnnotation [ a nhterm:Annotation ;
+            nhterm:anchorOf "Catalonia"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Catalonia> ] .
+
+<http://dbpedia.org/resource/Catalonia> a nhterm:Entity .

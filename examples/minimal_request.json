@@ -1,0 +1,4 @@
+{
+    "graph": "@prefix nh: <https://newshunter.uib.no/resource#> .\n@prefix nhterm: <https://newshunter.uib.no/term#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\nnh:fd916bac-206b-4230-8e71-84d6a27948cd a nhterm:Item ;\n    nhterm:hasAnnotation [ a nhterm:Annotation ;\n            nhterm:anchorOf \"Catalonia\"^^xsd:string ;\n            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;\n            nhterm:hasEntity <http://dbpedia.org/resource/Catalonia> ] .\n\n<http://dbpedia.org/resource/Catalonia> a nhterm:Entity .\n\n",
+    "in_notation": "turtle"
+}
