@@ -1,0 +1,161 @@
+@prefix nh: <https://newshunter.uib.no/resource#> .
+@prefix nhterm: <https://newshunter.uib.no/term#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+nh:0b87be7e-dd8a-4cbf-9ac1-8fca0e5d3115 a nhterm:Item ;
+    nhterm:hasAnnotation [ a nhterm:Annotation ;
+            nhterm:anchorOf "Catalonia"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Catalonia> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "democracy"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Democracy> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Spain"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Francoist_Spain> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Spain"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Francoist_Spain> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Spain"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Francoist_Spain> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "separatism"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Separatism> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Supreme Court"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Supreme_Court_of_the_United_States> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "free speech"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Freedom_of_speech> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Quim"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Quim_(footballer,_born_1975)> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Belgium"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Belgium> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Catalonia"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Catalonia> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Catalonia"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Catalonia> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Spanish"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Spain> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "general election"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/General_election> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Cabinet"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Cabinet_of_the_United_Kingdom> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "18 months"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/18_Months> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "plebiscite"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Referendum> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Barcelona"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Barcelona> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Spain"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Francoist_Spain> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "constitutional crisis"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Constitutional_crisis> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Spanish"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Spain> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Spain"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Francoist_Spain> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Cabinet"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Cabinet_of_the_United_Kingdom> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Supreme Court"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Supreme_Court_of_the_United_States> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "extradition"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Extradition> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Catalans"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Catalonia> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Deputy Prime Minister"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Deputy_Prime_Minister_of_the_United_Kingdom> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Catalan"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Catalonia> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "human rights"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Human_rights> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Catalonia"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Catalonia> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Catalonia"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Catalonia> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Carles Puigdemont"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Carles_Puigdemont> ],
+        [ a nhterm:Annotation ;
+            nhterm:anchorOf "Spain"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Francoist_Spain> ] ;
+    nhterm:hasContributor <https://newshunter.uib.no/resource/unresolved#The%20Associated%20Press> ;
+    nhterm:inCollection <http://www.wikidata.org/entity/Q45432> ;
+    nhterm:originalText "MADRID -- Catalonia's outgoing regional president has called on voters to advance the cause of separatism from Spain after the country's Supreme Court barred him from office for disobeying the country's electoral law. The top court's ruling earlier on Monday upheld a previous decision to remove Quim Torra as the chief of the northeastern region for refusing to remove a banner that called for the release of imprisoned separatist leaders and was displayed on a public building before the 2019 general election. The ruling has triggered a new period of political uncertainty in the northeastern region where a demand by some for independence has caused the country's biggest constitutional crisis in decades. According to the existing regulations, Torra's deputy Pere Aragones should take over as president-in-charge until the regional parliament elects a new leader or a new election is held. Pro-secession activists reacted by calling for protests later Monday in the regional capital, Barcelona. 'No unjust law applied for the purpose of revenge against those who defend human and universal rights will ever be able to defeat democracy,' Torra said in a televised address surrounded by members of his Cabinet, including Aragones. He also called on Catalans to turn the next regional election into a de-facto plebiscite on independence by voting for separatists and vowed to take his appeal against Monday's ruling to European courts. 'The only way forward is by democratically breaking away,' he said. Spanish Deputy Prime Minister Carmen Calvo told reporters that the deadlock should be resolved with a new election as soon as possible in order to reactivate dialogue between the regional and central authorities. 'The sooner Catalonia is ready to have the ability to work with the government of Spain, the better for everybody,' Calvo said. In their ruling, the panel of judges unanimously agreed to uphold last year's decision by a lower court to ban Torra from holding any public office for 18 months and fine him 30,000 euros ($35,000). Torra, a staunch separatist, became the head of Catalonia's government following the 2017 push for the region's independence that resulted in Spain removing then-regional president Carles Puigdemont, who fled to Belgium and has been fighting off extradition to Spain since then. 'Once more, the Spanish state interferes in our democratic institutions,' Puigdemont wrote in a tweet. Torra had remained at the helm of Catalonia during the appeal but Monday's decision must be implemented even if the case is taken to the European Court of Human Rights, as pledged by Torra's defence team. The banner at the centre of the case referred to a dozen former Catalan Cabinet members, lawmakers and activists who were imprisoned or left Spain following a declaration of independence in October 2017. The court on Friday said Torra had 'stubbornly' disobeyed the country's electoral board by refusing to take it down from a balcony in the regional government's headquarters. In hearings, Torra and his defence lawyers had argued that he was defending the higher cause of political and human rights. But the Supreme Court judges said that the electoral board's order didn't violate Torra's right to free speech, only limited what he could do in his role as an elected official. Polls and election results show that the 7.5 million residents of Catalonia, a wealthy northeastern region, are roughly equally split on the question of whether it should become independent from Spain."^^xsd:string ;
+    nhterm:sourceDateTime "2020-09-28T18:29:00+00:00"^^xsd:dateTime ;
+    nhterm:sourceIRL "https://www.ctvnews.ca/world/spain-s-top-court-rules-to-remove-catalan-chief-from-office-1.5123450"^^xsd:anyURI .
+
+<http://dbpedia.org/resource/18_Months> a nhterm:Entity .
+
+<http://dbpedia.org/resource/Barcelona> a nhterm:Entity .
+
+<http://dbpedia.org/resource/Belgium> a nhterm:Entity .
+
+<http://dbpedia.org/resource/Constitutional_crisis> a nhterm:Entity .
+
+<http://dbpedia.org/resource/Human_rights> a nhterm:Entity .
+
+<http://dbpedia.org/resource/Spain> a nhterm:Entity .
+
+<http://dbpedia.org/resource/Supreme_Court_of_the_United_States> a nhterm:Entity .
+
+<http://dbpedia.org/resource/Francoist_Spain> a nhterm:Entity .
+
+<http://dbpedia.org/resource/Catalonia> a nhterm:Entity .
+
