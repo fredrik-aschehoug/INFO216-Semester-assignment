@@ -143,9 +143,8 @@ class RelationService:
         for item in prepared_relations.values():
             relationAnnotation = BNode()
             self._graph.add((item["item"], nhterm.hasAnnotation, relationAnnotation))
-            self._graph.add((relationAnnotation, RDF.type, nhterm.RelationAnnotation))
+            self._graph.add((relationAnnotation, RDF.type, nhterm.SharedPredicateObjectRelation))
             self._graph.add((relationAnnotation, nhterm.hasAnnotator, self._ANNOTATOR))
-            self._graph.add((relationAnnotation, nhterm.relationType, nhterm.SharedPredicateObjectRelation))
             self._graph.add((relationAnnotation, nhterm.predicate, item["predicate"]))
             self._graph.add((relationAnnotation, nhterm.object, item["obj"]))
             entities = BNode()
@@ -157,9 +156,8 @@ class RelationService:
         for (item, entity1, relation, entity2) in relations:
             relationAnnotation = BNode()
             self._graph.add((item, nhterm.hasAnnotation, relationAnnotation))
-            self._graph.add((relationAnnotation, RDF.type, nhterm.RelationAnnotation))
+            self._graph.add((relationAnnotation, RDF.type, nhterm.StandardRelation))
             self._graph.add((relationAnnotation, nhterm.hasAnnotator, self._ANNOTATOR))
-            self._graph.add((relationAnnotation, nhterm.relationType, nhterm.StandardRelation))
             self._graph.add((relationAnnotation, nhterm.relationFrom, entity1))
             self._graph.add((relationAnnotation, nhterm.relationTo, entity2))
             self._graph.add((relationAnnotation, nhterm.hasRelation, relation))

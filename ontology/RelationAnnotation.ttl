@@ -1,0 +1,78 @@
+@prefix rdf: 	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: 	<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: 	<http://www.w3.org/2002/07/owl#> .
+@prefix dc: 	<http://purl.org/dc/elements/1.1/#> .
+@prefix : 	<https://newshunter.uib.no/term#> .
+@base 		<https://newshunter.uib.no/term#> .
+
+<https://newshunter.uib.no/term#> rdf:type owl:Ontology .
+
+################################################
+## Ontology describing the RelationAnnotation ##
+################################################
+
+### Properties ###
+:hasRelation rdf:type owl:ObjectProperty ;
+        rdfs:label "hasRelation"@en ; 
+        rdfs:domain :StandardRelation ;
+        rdfs:range owl:ObjectProperty . 
+
+:relationFrom rdf:type owl:ObjectProperty ;
+        rdfs:label "relationFrom"@en ; 
+        rdfs:domain :StandardRelation ;
+        rdfs:range :Entity . 
+
+:relationTo rdf:type owl:ObjectProperty ;
+        rdfs:label "relationTo"@en ; 
+        rdfs:domain :StandardRelation ;
+        rdfs:range :Entity . 
+
+:hasAnnotator rdf:type owl:ObjectProperty ;
+        rdfs:label "hasAnnotator"@en ; 
+        rdfs:domain :Annotation ;
+        rdfs:range :Agent . 
+
+:predicate rdf:type owl:ObjectProperty ;
+        rdfs:label "predicate"@en ; 
+        rdfs:domain :SharedPredicateObjectRelation ;
+        rdfs:range owl:ObjectProperty . 
+
+:object rdf:type owl:ObjectProperty ;
+        rdfs:label "object"@en ; 
+        rdfs:domain :SharedPredicateObjectRelation ;
+        rdfs:range owl:Class . 
+
+:entities rdf:type owl:ObjectProperty ;
+        rdfs:label "entities"@en ; 
+        rdfs:domain :SharedPredicateObjectRelation ;
+        rdfs:range :Entity . 
+
+###  Classes ###
+:SharedPredicateObjectRelation rdf:type owl:Class ; 
+        rdfs:subClassOf :RelationAnnotation , [ rdf:type owl:Restriction ; 
+                owl:onProperty :entities ;
+                owl:someValuesFrom :Entity ] ;
+        rdfs:label "SharedPredicateObjectRelation"@en .
+
+:Annotation rdf:type owl:Class ; 
+        rdfs:label "Annotation"@en .
+
+:Agent rdf:type owl:Class ; 
+        rdfs:label "Agent"@en . 
+
+owl:ObjectProperty rdf:type owl:Class ; 
+        rdfs:label "owl:ObjectProperty"@en . 
+
+:RelationAnnotation rdf:type owl:Class ; 
+        rdfs:subClassOf :Annotation ;
+        rdfs:label "RelationAnnotation"@en .
+
+:Entity rdf:type owl:Class ; 
+        rdfs:label "Entity"@en .
+
+:StandardRelation rdf:type owl:Class ; 
+        rdfs:subClassOf :RelationAnnotation ;
+        rdfs:label "StandardRelation"@en .
+
+owl:Class rdf:type owl:Class ; 
+        rdfs:label "owl:Class"@en . 
