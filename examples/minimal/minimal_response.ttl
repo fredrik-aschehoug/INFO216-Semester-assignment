@@ -1,0 +1,530 @@
+@prefix nh: <https://newshunter.uib.no/resource#> .
+@prefix nhterm: <https://newshunter.uib.no/term#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix p: <http://www.wikidata.org/prop/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wds: <http://www.wikidata.org/entity/statement/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix wdtn: <http://www.wikidata.org/prop/direct-normalized/> .
+@prefix wikibase: <http://wikiba.se/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yago4: <http://yago-knowledge.org/resource/> .
+
+nh:fd916bac-206b-4230-8e71-84d6a27948cd a nhterm:Item ;
+    nhterm:hasAnnotation [ a nhterm:Annotation ;
+            nhterm:anchorOf "Catalonia"^^xsd:string ;
+            nhterm:hasAnnotator <https://www.wikidata.org/wiki/Q276902> ;
+            nhterm:hasEntity <http://dbpedia.org/resource/Catalonia> ] .
+
+<http://dbpedia.org/resource/Catalonia> a nhterm:Entity ;
+    owl:sameAs wd:Q5705,
+        yago4:Catalonia .
+
+wd:Q5705 rdfs:label "Catalonia" ;
+    schema:dateModified "2021-03-15T08:42:20+00:00"^^xsd:dateTime ;
+    schema:description "autonomous community of Spain" ;
+    schema:version 1382414002 ;
+    wikibase:identifiers 66 ;
+    wikibase:sitelinks 196 ;
+    wikibase:statements 249 ;
+    wikibase:timestamp "2021-03-15T08:42:30+00:00"^^xsd:dateTime ;
+    skos:altLabel "Autonomous community of Catalonia",
+        "Catalonha",
+        "Catalunya",
+        "Cataluña" ;
+    p:P1005 wds:Q5705-b8e2804f-45fe-6e72-9752-da99cbe5f8bd ;
+    p:P1017 wds:Q5705-9b1dc22f-4eb2-f6e2-e9b7-1eb6c28b2193 ;
+    p:P1081 wds:Q5705-e066b74d-44f9-5ad2-66e6-57d69581ddd6 ;
+    p:P1082 wds:Q5705-40828741-43a5-4a6a-d6a2-7492a7089799,
+        wds:Q5705-87445e55-4ec4-c9d6-b143-a67b4d1099d9,
+        wds:Q5705-8a55fc21-488d-a3da-d811-f4d94548694f,
+        wds:Q5705-9826372b-4ce7-d644-da6b-bc8918fcae64,
+        wds:Q5705-a0ea2c5c-4b03-1fc6-318b-a1c69ef44d44,
+        wds:Q5705-daaa3d03-462a-e0b3-0351-a2ea6f93277f,
+        wds:Q5705-e1489222-4c66-3b1c-f94a-1ad0a1bf3bdb ;
+    p:P1151 wds:Q5705-b976e01f-4939-c543-b27c-c4fed99daf69 ;
+    p:P1198 wds:Q5705-043d2bc2-4b39-9e0d-14ba-924b7d0adc26,
+        wds:Q5705-44f8f998-4667-373c-96ac-0176631af399 ;
+    p:P122 wds:Q5705-1b4d7405-43ac-71d1-3609-e4b2642d51f6 ;
+    p:P1245 wds:Q5705-F4A4FB21-50AA-4A97-92EE-0391CB67E534 ;
+    p:P1273 wds:Q5705-f8f2b465-441e-c476-9a28-f37ebe596139 ;
+    p:P1296 wds:Q5705-a6524581-48bb-be46-713f-b8399c54246c ;
+    p:P131 wds:Q5705-979271b9-4ab1-2cc9-8a4d-98a43d5bad27 ;
+    p:P1313 wds:Q5705-c1defb05-47ec-b1f4-00f6-33780fb7077b ;
+    p:P1325 wds:Q5705-abd8788f-43f2-48ee-2c1c-e407b2861369 ;
+    p:P1332 wds:Q5705-fb759aba-4173-3ebc-d1d3-6a214a1248f5 ;
+    p:P1333 wds:Q5705-db99bc3d-4c16-e8b9-92f6-ed8918409b5d ;
+    p:P1334 wds:Q5705-a1ec704c-431c-57fd-dd20-0bbddb166b45 ;
+    p:P1335 wds:Q5705-b03a6901-4306-af22-7dc2-00c4874bf4cd ;
+    p:P1343 wds:Q5705-715E6B82-855F-4B4F-B63C-CCFFE2C66584,
+        wds:Q5705-BC5036DD-F10F-4B72-AE9C-1134671583D5,
+        wds:Q5705-e2acf09e-4bd9-9710-13b7-bfbc99fb5128,
+        wds:Q5705-e9823367-495f-ec54-c914-3c50cd87c440 ;
+    p:P1365 wds:Q5705-04a65903-43a6-7523-f539-841def0566f6 ;
+    p:P1368 wds:Q5705-4e2c4feb-4e34-1da7-3372-1c7981774397 ;
+    p:P138 wds:Q5705-33b226f0-44c5-ed70-01f1-2a1ad4b68f74 ;
+    p:P1410 wds:Q5705-aa5bbc99-4b93-cebb-fb07-dffbf8d29d51 ;
+    p:P1417 wds:Q5705-B2465899-CCEC-49CE-A38E-C1B4D95336E6 ;
+    p:P1448 wds:Q5705-0f4eec17-4c01-14d5-665f-fc8d2ebf958d,
+        wds:Q5705-52e7d506-416f-ee8a-1e1d-53eb2f3b737a,
+        wds:Q5705-5414bad7-4298-dbb1-d779-e86e2e8b41ac ;
+    p:P1464 wds:Q5705-9DA48C48-D685-41D5-915F-4A24EF61CD64 ;
+    p:P1465 wds:Q5705-038476E8-C4A8-4334-9D38-CE3A8E412CE8 ;
+    p:P1482 wds:Q5705-543e6592-4c5c-aa2f-6efb-b7171226a809 ;
+    p:P150 wds:Q5705-5dbd7434-4a54-5c61-a8b6-911d57d753ec,
+        wds:Q5705-78ec45b2-4027-1389-be42-6668a4591290,
+        wds:Q5705-a51ed323-47bd-1867-82b6-f93f9c266b5e,
+        wds:Q5705-ce2b92c4-4168-ac56-7a17-9d22e5370ac3 ;
+    p:P1549 wds:Q5705-0de2acbb-435c-2af0-8f98-492feff3bec9,
+        wds:Q5705-1f2776f2-40ce-e34d-18cb-86a0a8c82122,
+        wds:Q5705-2d082308-46b5-19cc-29ff-9ebf1eb89bc5,
+        wds:Q5705-39e5cad3-4353-d392-d428-79889a1a6620,
+        wds:Q5705-3be7cf8c-499d-74a5-4ff1-e2f8cf4a08e2,
+        wds:Q5705-4043c51a-4f8c-41fc-347a-29abfec185b9,
+        wds:Q5705-4f5dde4e-48bf-c377-733f-1edf5ebfaba9,
+        wds:Q5705-4fe7ad3b-4516-6179-1011-7aab6248725c,
+        wds:Q5705-572904b7-484b-3a46-dac9-6c4dbf0e09bc,
+        wds:Q5705-662fd5b7-4ab0-22c5-8534-be021492c5e4,
+        wds:Q5705-67bce018-4fd4-8781-3494-6855be05a20c,
+        wds:Q5705-6bf5c5bd-43a5-c150-5ee3-c0c322584364,
+        wds:Q5705-7ffbd11b-49b9-7d77-7905-a53e618ab37b,
+        wds:Q5705-86428a20-4f21-6d31-9da8-d1ed2e9d30c0,
+        wds:Q5705-87eb9a45-4200-e773-add1-b6bf09a1505a,
+        wds:Q5705-8c425809-450d-24d1-3c1b-041aecdebec2,
+        wds:Q5705-9d516362-4d0b-e50e-3ff4-1b9af3715434,
+        wds:Q5705-aa92f6b8-48a4-dd05-7185-68bc50e23b37,
+        wds:Q5705-b40e520f-493e-9aab-8341-d19eb9433776,
+        wds:Q5705-d07d2c0d-4c96-bcc8-1ab2-fb64690f3971,
+        wds:Q5705-ec7cf5aa-4328-7b5d-81c4-dbca4bd16769,
+        wds:Q5705-ee5e8d0d-4e80-1d00-bd62-c3d19395d68e,
+        wds:Q5705-f733c53c-4753-62e0-074e-8f04a383146f ;
+    p:P1566 wds:Q5705-EE76841B-FAA9-4CF8-B4A8-F60AC7847DDD ;
+    p:P1589 wds:Q5705-bcf08773-4513-8ab5-6994-a95d7565da3f ;
+    p:P1622 wds:Q5705-1a3e763d-463e-a2de-8fe7-b8cd40295594 ;
+    p:P163 wds:q5705-104867A4-2EBA-407A-BFC7-EC4613E51F7C ;
+    p:P1667 wds:Q5705-380e0b28-4ff4-c6ac-486d-9e77f89c8e91 ;
+    p:P1670 wds:Q5705-e02509a5-4dc5-f630-c950-0f790cc79ff6 ;
+    p:P17 wds:Q5705-f907da04-4484-4980-cd07-52e1f14d856b ;
+    p:P1705 wds:Q5705-334a0ef3-46b6-f28b-3077-1bcb2835be12,
+        wds:Q5705-c52e2396-4956-44b8-89da-78e8f45b316c,
+        wds:Q5705-dbdbaec6-4c08-1aba-3bdd-4188c51a7b5a ;
+    p:P1740 wds:Q5705-4A7EC755-0DA7-4D44-8886-92DFA59C4F32 ;
+    p:P1791 wds:Q5705-bdff91d9-4352-c590-ac5c-21db9350c854 ;
+    p:P1792 wds:Q5705-A037E221-8B04-4112-B905-877E3432657E ;
+    p:P18 wds:Q5705-74094f5a-4dfd-9198-9c79-dc986b6d88af ;
+    p:P1889 wds:Q5705-55568e09-4e16-7c23-971c-05db42d945c2 ;
+    p:P194 wds:q5705-17312EC4-7167-49F3-BBF2-2F8D36D75F94 ;
+    p:P1958 wds:Q5705-0B05AB93-6F57-40B2-9AA0-35EA93B1B9F4 ;
+    p:P2046 wds:Q5705-811314eb-4120-1867-091a-a027a5b221ad ;
+    p:P206 wds:Q5705-ed7bfa21-4d60-4156-e63e-9fd68bcfa323 ;
+    p:P208 wds:Q5705-7bc70024-4742-4a9b-f515-6bb676f54794 ;
+    p:P209 wds:q5705-DECA325E-39E1-471D-A5B9-DDDEBBC9BFE7 ;
+    p:P213 wds:Q5705-e04455a4-4643-09a2-04b0-b6c37a1ea2dd ;
+    p:P214 wds:Q5705-16e2248f-43ad-3a1f-4ff0-a0cf7afbf342 ;
+    p:P2163 wds:Q5705-427ab555-4a8c-0092-bf22-e4ee289ebf0c ;
+    p:P2184 wds:Q5705-6238cf25-4552-de06-9768-fd1609af8f96 ;
+    p:P2250 wds:Q5705-c89849fe-4f7c-9698-ae53-485c20a33297 ;
+    p:P227 wds:Q5705-BC59B63C-A4D8-42E8-ACBF-166EC19144E7 ;
+    p:P2347 wds:Q5705-E05B9907-0254-4B17-AEEB-1165B718A6E2 ;
+    p:P237 wds:Q5705-33979785-40db-9e94-691d-3fedb117846e ;
+    p:P242 wds:Q5705-071176c2-45ac-b266-2948-8af6b9e0d3bb,
+        wds:q5705-BE9B613C-9011-4B43-A275-BB7539E574D1 ;
+    p:P244 wds:Q5705-D84FD907-95B6-4F95-AE44-4558B5CE5E58 ;
+    p:P2572 wds:Q5705-1b48f40a-4046-933d-fc4b-f61f5ddb98d9,
+        wds:Q5705-a2c5d033-423c-1df2-f083-f1e0aea41cf4 ;
+    p:P2633 wds:Q5705-ca98d85b-4b05-2dfb-7e8c-67a3c543456e ;
+    p:P2670 wds:Q5705-df1c728b-48f5-b58e-013a-d9958078284f,
+        wds:Q5705-fe0f3705-4953-ba21-5116-855b55863d41 ;
+    p:P268 wds:Q5705-c691895c-46b7-c3f5-8896-8b19edfbf01f ;
+    p:P269 wds:Q5705-cceed1ab-453a-20bd-ff6b-8ce8f6ae27db ;
+    p:P271 wds:Q5705-fc176bf2-4d57-a16b-4a19-40a01077c9ad ;
+    p:P2799 wds:Q5705-BDC999EB-D002-47ED-BB16-4ABB7B3EE052,
+        wds:Q5705-BFA47A05-6670-4F32-AA58-D28A3E36CE3F ;
+    p:P2853 wds:Q5705-40fada04-4639-3bcd-b1f4-dad373fb99dd,
+        wds:Q5705-fa6eb1a7-4a10-c19d-897f-bd17f9eda119 ;
+    p:P2855 wds:Q5705-1c2d3b4c-4f69-de39-2715-24d034943f6e,
+        wds:Q5705-32106d6e-4d39-ea3b-b55d-1533f2eb10dd,
+        wds:Q5705-c84b9736-4099-968e-9081-cd8bbc373717 ;
+    p:P2884 wds:Q5705-808f3809-4759-7ccb-48f7-e2069a16b52b ;
+    p:P2924 wds:Q5705-08f69add-4976-a19b-7a95-77bdfac8acc0 ;
+    p:P2936 wds:Q5705-256a267b-4a01-9efa-e1ad-f293b1555e9d,
+        wds:Q5705-79ff9245-4364-e86c-2549-108ca3231d0b,
+        wds:Q5705-A257D0EC-1488-49B1-BCF3-92D9C81407C5,
+        wds:Q5705-ec8974aa-4055-72da-c8e0-46344182a79f ;
+    p:P2997 wds:Q5705-32515d48-4a1b-626a-6000-6dc927f66fd9 ;
+    p:P30 wds:q5705-8EA7CD93-2135-429F-9C84-0FBF1692F5B8 ;
+    p:P300 wds:q5705-9D8F9B46-8D27-4949-BA75-97D977FEA481 ;
+    p:P3001 wds:Q5705-3ec3194d-4ba7-1e7b-d8ac-f5e0c253ad22 ;
+    p:P3065 wds:Q5705-cbee39aa-4446-a05a-1eea-8179b5337b3f ;
+    p:P3075 wds:Q5705-50f41532-4736-11c7-837b-f4934f2a0f75 ;
+    p:P3086 wds:Q5705-2216831b-4d14-b8d6-96bf-8be99be90da8,
+        wds:Q5705-5d32b3c6-4844-f6ac-97ef-f683a3ccf42e,
+        wds:Q5705-b4087ad1-4731-f02d-d6fc-af605b89d412 ;
+    p:P31 wds:Q5705-976b25a0-4ac7-07c1-6d2b-91b5a60e33ac,
+        wds:Q5705-ab0d5a3d-4bef-a6fa-3b30-026de5e88e61,
+        wds:Q5705-b93d98ed-4090-d30f-214a-29bd68ce230f,
+        wds:Q5705-d5709763-45da-2290-4c8c-21c74e748bb1,
+        wds:Q5705-f9c32267-447a-650c-e98c-c4ae930e847e ;
+    p:P3106 wds:Q5705-7596150f-402b-6500-8fbb-0d62b1c9dce3 ;
+    p:P3219 wds:Q5705-3C9F69A2-40A7-4DF7-9460-FBDE43DCD72F ;
+    p:P3222 wds:Q5705-20773A5F-E751-45CE-8EB5-B56FF38BBBD3 ;
+    p:P3241 wds:Q5705-C1F4FD13-4DC2-4B5C-A22C-290D3B4147AF ;
+    p:P3270 wds:Q5705-960f8cbb-40ad-6fd6-6e45-01e32eae32bd ;
+    p:P3271 wds:Q5705-9fbb2e3b-45e5-a1d0-028a-ef13ec5ca681 ;
+    p:P3417 wds:Q5705-734F775D-D684-438B-9639-2D9C8BEE9FAD,
+        wds:Q5705-7A902611-A9C1-4DEA-81AA-F5310A377C01 ;
+    p:P349 wds:Q5705-B98AB64A-1A74-4979-8DA1-DC5F6458F811 ;
+    p:P3509 wds:Q5705-B37A1DFC-1978-4568-9FAF-E2AFE675FC63 ;
+    p:P36 wds:q5705-B44CC6BB-BCA5-410B-9A04-E0933719DFFE ;
+    p:P361 wds:Q5705-3689b4f8-4756-a8b9-2939-55fa2fcd66a1,
+        wds:Q5705-445902b0-4a49-f825-2e60-8774cee28830,
+        wds:Q5705-6e73eb6b-4830-604c-0923-ec992f800272 ;
+    p:P3630 wds:Q5705-61CD7173-F76A-45FC-9C69-0928B785E489 ;
+    p:P37 wds:q5705-28D902F5-8E90-423C-97F1-186E2A9D78AD,
+        wds:q5705-3F5BF586-7F53-4D28-BC35-20BA5795DF5B,
+        wds:q5705-9C9264CB-98C3-476C-BF94-D5DDBE93A388 ;
+    p:P373 wds:q5705-ABD0D002-63E3-413B-8397-40173FB54D7E ;
+    p:P38 wds:Q5705-4dfb17d9-49b8-e0f5-3439-e37b5a58d3ae,
+        wds:Q5705-ac75a001-495c-8152-4b8a-e40464bfd05a ;
+    p:P3984 wds:Q5705-231f4524-4397-bd52-9641-4849879f68da ;
+    p:P402 wds:Q5705-3b8f966d-4243-d2df-f040-ac76d7350204 ;
+    p:P41 wds:q5705-ab9781bc-47f2-a73d-fe6d-171b3dcc6425 ;
+    p:P417 wds:Q5705-702c9b71-4e1e-c06b-6aae-13ffab4da956,
+        wds:q5705-65a7109b-48de-a70b-f413-d58e0c93ee1c ;
+    p:P421 wds:Q5705-3ec91236-4938-b2e2-8403-f6e64c3d8f30,
+        wds:q5705-91BEA578-784B-4A73-9F3D-DA0B6FE8A4B8 ;
+    p:P443 wds:Q5705-30b22424-4bc9-e67f-8598-f4189fdd57c7 ;
+    p:P4527 wds:Q5705-2D02B416-0023-428F-BD60-33F019B66055 ;
+    p:P463 wds:Q5705-2edd0f83-4a9b-030f-8a5e-86afd79a617b,
+        wds:Q5705-86b8797a-476a-6fe7-bd24-6746b7f332d3,
+        wds:Q5705-9c029735-495d-43f9-88b4-8ebb26e0517d,
+        wds:Q5705-b7bcced9-413d-6ada-d573-b9f74db5c527,
+        wds:Q5705-ed01fbb3-43ad-febf-2a28-b299078df869,
+        wds:Q5705-eec3b795-4005-c45d-c04e-d0c08f9a2aa0 ;
+    p:P47 wds:Q5705-401ed267-4e2f-9d3c-ac59-4adfc6e26dc4,
+        wds:q5705-1C495AC6-23F5-45F2-A75C-61FD42A7D5F4,
+        wds:q5705-62FBBE85-656C-48DF-BBC9-32EC8241A16B,
+        wds:q5705-FA01C59C-E771-4070-878C-B5E6E889E026 ;
+    p:P485 wds:Q5705-4f4b837d-4f43-bf0b-333d-54fb972d47fb ;
+    p:P5063 wds:Q5705-4030966B-D270-4712-AECB-38BB409D82BE ;
+    p:P5125 wds:Q5705-bec09908-4b3e-dbc9-9550-9d924918508f ;
+    p:P5437 wds:Q5705-24A6715A-6781-43E8-B436-6AC3F7E910E5 ;
+    p:P5573 wds:Q5705-8FC5ED1D-29A2-4BB7-9E62-BC758BF4A815 ;
+    p:P5587 wds:Q5705-F1F0472C-584A-4DA4-BF33-764D89D9B149 ;
+    p:P5658 wds:Q5705-a3f44013-419d-8195-689c-1ac83a03d3bb ;
+    p:P571 wds:Q5705-0145e91e-490d-b4d7-2c2a-029ae451c9f2,
+        wds:Q5705-1a23759b-48d2-eb63-68c8-b1cc631a915c,
+        wds:Q5705-42954087-4eed-32b2-2ce3-426565229ffa,
+        wds:Q5705-7c860b95-4210-f313-148c-7b6d8c8b15c2,
+        wds:Q5705-a4b6fdce-4136-f7f3-7aba-09b77689a7df,
+        wds:Q5705-bb2e429b-4268-116d-8fd3-0132012eff79,
+        wds:Q5705-d17901f6-48e0-863e-77d7-006b3091ad98,
+        wds:Q5705-f3a7ec98-4478-81e7-f0d6-8b1d2ccc103a ;
+    p:P5843 wds:Q5705-8761B49F-DB6B-4200-92F8-2F2E525ED577 ;
+    p:P5905 wds:Q5705-FF409708-465C-4D06-A25E-F9F405C6680A ;
+    p:P6 wds:Q5705-4f6d5ec5-4037-4d60-0f23-6d53fbbf2e53,
+        wds:Q5705-7ba48afe-440e-88c5-010e-c4e38d010fa0,
+        wds:Q5705-a62b0a9f-44d9-740a-d36b-e8e5fcb7c346,
+        wds:Q5705-acd9ee42-4699-b5fa-be0d-16683243eb77,
+        wds:Q5705-cbccaad5-4ff6-2111-0a67-ede6a479c464,
+        wds:Q5705-e5f6e31a-47c3-04ac-30b4-aa8b873c90b7 ;
+    p:P605 wds:q5705-e492e786-4e69-7967-61f7-166195191d96 ;
+    p:P610 wds:q5705-3f6ff6eb-4ea0-d4f5-196c-428c318b7d3d ;
+    p:P6104 wds:Q5705-68ef0bed-4cab-b2fb-95cc-d5e0bd793a85 ;
+    p:P6200 wds:Q5705-360d9575-4af0-dff0-a788-72df60c797e8 ;
+    p:P625 wds:Q5705-f85e56b4-40b7-9b21-f1b2-1db2e1d6f45d ;
+    p:P6404 wds:Q5705-B9DBBC8E-1ADA-44BD-8DF3-3509415D656C ;
+    p:P646 wds:Q5705-0B513A94-A7E4-4C7F-9EA7-7D381C71BA12 ;
+    p:P6573 wds:Q5705-9FEE2D99-0982-43F8-9F5F-10F53490789A ;
+    p:P6766 wds:Q5705-D6679B99-3566-44DD-B154-6D27E19341D5 ;
+    p:P691 wds:Q5705-ef1d9116-47ec-dac8-8711-0dc7c8b1a2b6 ;
+    p:P706 wds:Q5705-45ad44e7-4c5d-b630-8e57-17d33fa3920b ;
+    p:P7284 wds:Q5705-318e9daa-4d6b-7550-745c-616f04df5586 ;
+    p:P7301 wds:Q5705-5a3c1ce1-4d3c-ab43-1fbb-cfc310db630e ;
+    p:P7818 wds:Q5705-83A6EAD8-BD8F-4C56-8BF5-48F8D4D312C9 ;
+    p:P7827 wds:Q5705-0831BA66-4BFD-4319-8C34-E92F12B55440 ;
+    p:P7859 wds:Q5705-515A8AB7-66F3-4609-8686-C4CC15B84CDB ;
+    p:P7867 wds:Q5705-778a2589-7489-4d08-8bd6-62eb6c789346 ;
+    p:P793 wds:Q5705-00305d57-4c50-ea6c-1fa1-149049fbacf9,
+        wds:Q5705-2736dda2-4238-732d-6ed5-81af2874e824,
+        wds:Q5705-3e127c86-4932-0353-cf34-dcfc04b64eba,
+        wds:Q5705-6fe5b52b-4434-4e48-acac-71c03afca7d4,
+        wds:Q5705-720eb342-48a3-956d-5c7f-de270e2e69d1,
+        wds:Q5705-82b3eb83-4e02-00f5-8ab6-e45542a3fae8,
+        wds:Q5705-9576eea5-40e2-c1e4-86e4-35a219cb01e7,
+        wds:Q5705-961ab526-4bab-4c1f-9841-e2676d825d22,
+        wds:Q5705-b75b64f5-48db-8803-7259-f1de132c03c0,
+        wds:Q5705-cb9bb2fe-4344-1609-990f-8735b3cd588e,
+        wds:Q5705-e05fb8ee-4739-b67a-d961-3b8a6e136a23 ;
+    p:P8034 wds:Q5705-6889709B-CE67-4716-93EB-B828E09D8314 ;
+    p:P832 wds:Q5705-d1faa6f9-41a7-2d21-844b-07de78d1ba0e ;
+    p:P8406 wds:Q5705-F3350588-AA52-4F2B-A9B1-1279F1504797 ;
+    p:P8408 wds:Q5705-F2A61038-3BDD-4C8B-B008-4C11F8DD44C3 ;
+    p:P8472 wds:Q5705-7A0BDDB9-FA81-4657-B96C-BD85F44C0544 ;
+    p:P85 wds:q5705-5ECAE865-7A12-4C7D-A02A-73D76B1FE187 ;
+    p:P8519 wds:Q5705-7bc1642f-9e0a-4908-8c9a-542114852bc1 ;
+    p:P856 wds:Q5705-5a2e1bd5-49c2-e47d-a3e7-13d4f49561eb ;
+    p:P8744 wds:Q5705-9D066960-4504-4293-A781-9F9EFD9E91E5 ;
+    p:P8814 wds:Q5705-C2B395EB-716F-4E93-B797-7F683E0E6155 ;
+    p:P898 wds:Q5705-533c143a-4b62-d001-ee83-c2aeb4e3bc2f,
+        wds:Q5705-5d9fb97b-4d30-c41c-6486-de93da3a174c,
+        wds:Q5705-e6c1711c-4e10-37e9-363f-ca423ea12580,
+        wds:Q5705-f80072bd-46fe-5e6c-c2e4-ba4c1b3a571b ;
+    p:P901 wds:Q5705-3B2A2005-B1AE-429B-8D4A-8E1A70F91191 ;
+    p:P906 wds:Q5705-96acb33b-40a2-754e-5293-f61ea5658149 ;
+    p:P910 wds:Q5705-8E225733-9501-4CC0-BB90-67778C467450 ;
+    p:P92 wds:Q5705-f9584b7a-441a-ecaa-cd28-e1aca6af595a ;
+    p:P9241 wds:Q5705-CC8AECB0-48D9-45F0-AF65-87B6D082CB1E ;
+    p:P935 wds:Q5705-5C7C2566-BA19-4C7D-B093-5FD212E44124 ;
+    p:P94 wds:q5705-94243D47-88D3-408F-9661-76276A0E381D ;
+    p:P948 wds:Q5705-815DAF38-7F37-4CDE-9A8A-7C7704167C2C ;
+    p:P949 wds:Q5705-e8ff5724-4c63-d256-411b-0a3c41ba94bc ;
+    p:P982 wds:Q5705-70E4D5DF-A559-4E96-8C86-18C85487AE73 ;
+    p:P998 wds:Q5705-A5CCDA65-065C-4F60-A50B-8A5BAB0872E8 ;
+    wdtn:P1566 <http://sws.geonames.org/3336901> ;
+    wdtn:P1667 <http://vocab.getty.edu/tgn/7030216> ;
+    wdtn:P214 <http://viaf.org/viaf/159380011> ;
+    wdtn:P2163 <http://id.worldcat.org/fast/1206043> ;
+    wdtn:P227 <https://d-nb.info/gnd/4029916-8> ;
+    wdtn:P2347 <http://www.yso.fi/onto/yso/p108089> ;
+    wdtn:P244 <https://id.loc.gov/authorities/names/n79089624> ;
+    wdtn:P268 <http://data.bnf.fr/ark:/12148/cb11868397w#about> ;
+    wdtn:P269 <http://www.idref.fr/026436051/id> ;
+    wdtn:P2799 <http://data.cervantesvirtual.com/person/15402>,
+        <http://data.cervantesvirtual.com/person/60736> ;
+    wdtn:P349 <http://id.ndl.go.jp/auth/ndlna/00628351> ;
+    wdtn:P402 <https://www.openstreetmap.org/relation/349053> ;
+    wdtn:P5063 <http://globalwordnet.org/ili/i84103> ;
+    wdtn:P5437 <http://eurovoc.europa.eu/5273> ;
+    wdtn:P5587 <https://libris.kb.se/nl021qz644jl4f6> ;
+    wdtn:P646 <http://g.co/kg/m/01zv_> ;
+    wdtn:P8408 <http://kbpedia.org/kko/rc/Catalonia> ;
+    wdtn:P8519 <https://data.rkd.nl/thesau/6513> ;
+    wdtn:P906 <http://libris.kb.se/resource/auth/150096> ;
+    wdtn:P982 <http://musicbrainz.org/area/92e2d2d3-63b0-4b5a-adca-0e31c367eca2> ;
+    wdt:P1005 "262699" ;
+    wdt:P1017 "ADV12280735" ;
+    wdt:P1081 0.904 ;
+    wdt:P1082 7727029.0 ;
+    wdt:P1151 wd:Q10957569 ;
+    wdt:P1198 11.7,
+        13.23 ;
+    wdt:P122 wd:Q166747 ;
+    wdt:P1245 "463095" ;
+    wdt:P1273 "a11446948" ;
+    wdt:P1296 "0016436" ;
+    wdt:P131 wd:Q29 ;
+    wdt:P1313 wd:Q16933549 ;
+    wdt:P1325 <http://governobert.gencat.cat> ;
+    wdt:P1332 "Point(0.7 42.85)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> ;
+    wdt:P1333 "Point(0.85 40.516666666)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> ;
+    wdt:P1334 "Point(3.322194444 42.3195)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> ;
+    wdt:P1335 "Point(0.166666666 40.716666666)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> ;
+    wdt:P1343 wd:Q2657718,
+        wd:Q2664168,
+        wd:Q302556,
+        wd:Q3181656 ;
+    wdt:P1365 wd:Q90400112 ;
+    wdt:P1368 "000120091" ;
+    wdt:P138 wd:Q244504 ;
+    wdt:P1410 135.0 ;
+    wdt:P1417 "place/Catalonia" ;
+    wdt:P1464 wd:Q6580248 ;
+    wdt:P1465 wd:Q14331303 ;
+    wdt:P1482 <https://travel.stackexchange.com/tags/catalonia> ;
+    wdt:P150 wd:Q13904,
+        wd:Q7194,
+        wd:Q81949,
+        wd:Q98392 ;
+    wdt:P1549 "Catalan" ;
+    wdt:P1566 "3336901" ;
+    wdt:P1589 wd:Q125465 ;
+    wdt:P1622 wd:Q14565199 ;
+    wdt:P163 wd:Q148807 ;
+    wdt:P1667 "7030216" ;
+    wdt:P1670 "0053J1601" ;
+    wdt:P17 wd:Q29 ;
+    wdt:P1740 wd:Q19547251 ;
+    wdt:P1791 wd:Q8328540 ;
+    wdt:P1792 wd:Q5911814 ;
+    wdt:P18 <http://commons.wikimedia.org/wiki/Special:FilePath/NASA%20Satellite%20Catalonia.jpg> ;
+    wdt:P1889 wd:Q138837 ;
+    wdt:P194 wd:Q135630 ;
+    wdt:P1958 "38493" ;
+    wdt:P2046 31895.0 ;
+    wdt:P206 wd:Q4918 ;
+    wdt:P208 wd:Q3112544 ;
+    wdt:P209 wd:Q6152366 ;
+    wdt:P213 "0000 0001 2331 7762" ;
+    wdt:P214 "159380011" ;
+    wdt:P2163 "1206043" ;
+    wdt:P2184 wd:Q1516481 ;
+    wdt:P2250 83.63 ;
+    wdt:P227 "4029916-8" ;
+    wdt:P2347 "108089" ;
+    wdt:P237 wd:Q1513781 ;
+    wdt:P242 <http://commons.wikimedia.org/wiki/Special:FilePath/Cataluna%20in%20Spain%20%28including%20Canarias%29.svg>,
+        <http://commons.wikimedia.org/wiki/Special:FilePath/E.U-Catalonia.png> ;
+    wdt:P244 "n79089624" ;
+    wdt:P2572 "Catalonia",
+        "Catalunya" ;
+    wdt:P2633 wd:Q935722 ;
+    wdt:P2670 wd:Q33146843,
+        wd:Q937876 ;
+    wdt:P268 "11868397w" ;
+    wdt:P269 "026436051" ;
+    wdt:P271 "DA03973715" ;
+    wdt:P2799 "15402",
+        "60736" ;
+    wdt:P2853 wd:Q1123613,
+        wd:Q1378312 ;
+    wdt:P2855 4.0,
+        10.0,
+        21.0 ;
+    wdt:P2884 230.0 ;
+    wdt:P2924 "2051803" ;
+    wdt:P2936 wd:Q10196,
+        wd:Q1321,
+        wd:Q35768,
+        wd:Q7026 ;
+    wdt:P2997 18.0 ;
+    wdt:P30 wd:Q46 ;
+    wdt:P300 "ES-CT" ;
+    wdt:P3001 65.0 ;
+    wdt:P3065 "02-A000029847" ;
+    wdt:P3075 wd:Q7882536 ;
+    wdt:P3086 50.0,
+        90.0,
+        120.0 ;
+    wdt:P31 wd:Q10742 ;
+    wdt:P3106 "world/catalonia" ;
+    wdt:P3219 "catalogne" ;
+    wdt:P3222 "cataluna" ;
+    wdt:P3241 "03428a" ;
+    wdt:P3270 6.0 ;
+    wdt:P3271 16.0 ;
+    wdt:P3417 "Catalonia",
+        "Cataluna-Spain" ;
+    wdt:P349 "00628351" ;
+    wdt:P3509 "katalonien" ;
+    wdt:P36 wd:Q1492 ;
+    wdt:P361 wd:Q1849394,
+        wd:Q234963,
+        wd:Q29 ;
+    wdt:P3630 "157013" ;
+    wdt:P37 wd:Q10196,
+        wd:Q1321,
+        wd:Q7026 ;
+    wdt:P373 "Catalonia" ;
+    wdt:P38 wd:Q4916 ;
+    wdt:P3984 "catalonia" ;
+    wdt:P402 "349053" ;
+    wdt:P41 <http://commons.wikimedia.org/wiki/Special:FilePath/Flag%20of%20Catalonia.svg> ;
+    wdt:P417 wd:Q301779,
+        wd:Q48438 ;
+    wdt:P421 wd:Q6655 ;
+    wdt:P443 <http://commons.wikimedia.org/wiki/Special:FilePath/LL-Q150%20%28fra%29-Fabricio%20Cardenas%20%28Culex%29-Catalogne.wav> ;
+    wdt:P4527 "9012" ;
+    wdt:P463 wd:Q10457748,
+        wd:Q26780139,
+        wd:Q678630,
+        wd:Q679863,
+        wd:Q8348981,
+        wd:Q958154 ;
+    wdt:P47 wd:Q18678265,
+        wd:Q228,
+        wd:Q4040,
+        wd:Q5720 ;
+    wdt:P485 wd:Q8203649 ;
+    wdt:P5063 "i84103" ;
+    wdt:P5125 wd:Q7112223 ;
+    wdt:P5437 "5273" ;
+    wdt:P5573 "2817" ;
+    wdt:P5587 "nl021qz644jl4f6" ;
+    wdt:P5658 wd:Q14565199 ;
+    wdt:P571 "0988-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    wdt:P5843 "Catalonia" ;
+    wdt:P5905 "4020-61950" ;
+    wdt:P6 wd:Q1945815,
+        wd:Q355265,
+        wd:Q458702,
+        wd:Q465464,
+        wd:Q4740163,
+        wd:Q8015 ;
+    wdt:P605 "ES51" ;
+    wdt:P610 wd:Q1537733 ;
+    wdt:P6104 wd:Q19551051 ;
+    wdt:P6200 "c0rep987p7rt" ;
+    wdt:P625 "Point(1.47 41.81)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> ;
+    wdt:P6404 "catalogna" ;
+    wdt:P646 "/m/01zv_" ;
+    wdt:P6573 "Katalonien" ;
+    wdt:P6766 "85682851" ;
+    wdt:P691 "ge129550" ;
+    wdt:P706 wd:Q12837 ;
+    wdt:P7284 "Catalonia" ;
+    wdt:P7301 "issues/catalonia" ;
+    wdt:P7818 "Catalogne" ;
+    wdt:P7827 "Cataluña" ;
+    wdt:P7859 "lccn-n79089624" ;
+    wdt:P7867 wd:Q84022589 ;
+    wdt:P793 wd:Q1348955,
+        wd:Q152499,
+        wd:Q15650559,
+        wd:Q166495,
+        wd:Q18286339,
+        wd:Q221670,
+        wd:Q41796018,
+        wd:Q688436,
+        wd:Q703472,
+        wd:Q847664,
+        wd:Q8488 ;
+    wdt:P8034 "494/34743" ;
+    wdt:P832 wd:Q156397 ;
+    wdt:P8406 "T2220271" ;
+    wdt:P8408 "Catalonia" ;
+    wdt:P8472 "953" ;
+    wdt:P85 wd:Q271585 ;
+    wdt:P8519 "6513" ;
+    wdt:P856 <http://www.gencat.cat> ;
+    wdt:P8744 wd:Q2879009 ;
+    wdt:P8814 "09050432-n" ;
+    wdt:P898 "kataˈluɲo",
+        "kataˈɫuɲa",
+        "kætəˈloʊniə",
+        "kətəˈɫuɲə" ;
+    wdt:P901 "SP56" ;
+    wdt:P906 "150096" ;
+    wdt:P910 wd:Q7460028 ;
+    wdt:P92 wd:Q1975265 ;
+    wdt:P9241 wd:Q2894662 ;
+    wdt:P935 "Catalunya" ;
+    wdt:P94 <http://commons.wikimedia.org/wiki/Special:FilePath/Coat%20of%20Arms%20of%20Catalonia.svg> ;
+    wdt:P948 <http://commons.wikimedia.org/wiki/Special:FilePath/Montserrat%20Mountains%20banner.jpg> ;
+    wdt:P949 "000976382" ;
+    wdt:P982 "92e2d2d3-63b0-4b5a-adca-0e31c367eca2" ;
+    wdt:P998 "Regional/Europe/Spain/Autonomous_Communities/Catalonia/" .
+
+yago4:Catalonia a schema:AdministrativeArea,
+        schema:Place,
+        schema:Thing,
+        yago4:Autonomous_communities_of_Spain ;
+    rdfs:label "Catalonia" ;
+    schema:alternateName "Autonomous community of Catalonia",
+        "Catalonha",
+        "Catalunya",
+        "Cataluña" ;
+    schema:containedInPlace yago4:Iberian_Peninsula,
+        yago4:Spain ;
+    schema:containsPlace yago4:Province_of_Barcelona,
+        yago4:Province_of_Girona,
+        yago4:Province_of_Lleida,
+        yago4:Province_of_Tarragona ;
+    schema:geo <geo:41.81,1.47> ;
+    schema:image <http://commons.wikimedia.org/wiki/Special:FilePath/NASA%20Satellite%20Catalonia.jpg> ;
+    schema:url "http://www.gencat.net/"^^xsd:anyURI ;
+    rdfs:comment "autonomous community of Spain" .
+
